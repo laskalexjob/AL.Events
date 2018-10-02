@@ -133,6 +133,20 @@
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AL.Events.Business\AL.Events.Business.csproj">
+      <Project>{07c57bb0-e257-4f87-adf5-9e41e6d7c32f}</Project>
+      <Name>AL.Events.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AL.Events.Common\AL.Events.Common.csproj">
+      <Project>{5cb18d61-a81d-4e36-bab5-1e597e10e7df}</Project>
+      <Name>AL.Events.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AL.Events.Dependency\AL.Events.Dependency.csproj">
+      <Project>{c8350156-bdb5-4163-ae63-08b4f8f36160}</Project>
+      <Name>AL.Events.Dependency</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
