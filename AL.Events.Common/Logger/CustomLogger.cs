@@ -1,7 +1,6 @@
 ﻿using log4net;
 using log4net.Config;
 using System;
-using System.Configuration;
 using System.IO;
 using System.Reflection;
 
@@ -29,9 +28,7 @@ namespace AL.Events.Common.Logger
 
             var fullPath = string.Format($"{currentDirectory}\\{configName}");
 
-            var fileInfo = new FileInfo(fullPath);
-
-            return fileInfo;
+            return new FileInfo(fullPath);
         }
 
         public void WriteToLogInfo(string info)
