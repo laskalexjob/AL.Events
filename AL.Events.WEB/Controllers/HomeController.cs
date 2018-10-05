@@ -16,7 +16,7 @@ namespace AL.Events.WEB.Controllers
         {
             string str = "hi there";
 
-            _customLogger.WriteToLogInfo("God save America!");
+            _customLogger.WriteToLogInfo("Message from Home controller");
 
             return View(str as object);
         }

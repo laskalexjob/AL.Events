@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dependencies\CommonRegistry.cs" />
+    <Compile Include="Entities\Category.cs" />
     <Compile Include="Logger\CustomLogger.cs" />
     <Compile Include="Logger\ICustomLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,8 +72,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

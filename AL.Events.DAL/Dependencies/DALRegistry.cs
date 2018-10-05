@@ -1,9 +1,8 @@
-﻿using StructureMap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AL.Events.Common.Entities;
+using AL.Events.Common.Logger;
+using AL.Events.DAL.Repositories;
+using AL.Events.DAL.Repositories.Interfaces;
+using StructureMap;
 
 namespace AL.Events.DAL.Dependencies
 {
@@ -11,7 +10,8 @@ namespace AL.Events.DAL.Dependencies
     {
         public DALRegistry()
         {
-
+            For<ICustomLogger>().Use<CustomLogger>();
+            For<IRepository<Category>>().Use<CategoryRepository>();
         }
     }
 }

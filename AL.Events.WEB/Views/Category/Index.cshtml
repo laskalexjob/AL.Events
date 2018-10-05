@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AL.Events.WEB.Models.CategoryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Категории</h2>
+
+<p>
+    @Html.RouteLink("Добавить новую категорию", new { controller = "Category", action = "CreateNewCategory" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Добавить новую подкатегорию", new { controller = "Category", action = "Create" }, new { @class = "btn btn-default" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.RouteLink("Изменить", new { controller = "Category", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Подробнее", new { controller = "Category", action = "Details", id = item.Id }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Удалить", new { controller = "Category", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+
+            </td>
+        </tr>
+    }
+
+</table>
+<a href="#" onclick="history.go(-1); return false;" class="btn btn-default">Назад</a>
