@@ -7,8 +7,7 @@
 <h2>Категории</h2>
 
 <p>
-    @Html.RouteLink("Добавить новую категорию", new { controller = "Category", action = "CreateNewCategory" }, new { @class = "btn btn-default" })
-    @Html.RouteLink("Добавить новую подкатегорию", new { controller = "Category", action = "Create" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Добавить новую категорию", new { controller = "Category", action = "Create" }, new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -32,7 +31,6 @@
             </td>
             <td>
                 @Html.RouteLink("Изменить", new { controller = "Category", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
-                @Html.RouteLink("Подробнее", new { controller = "Category", action = "Details", id = item.Id }, new { @class = "btn btn-default" })
                 @Html.RouteLink("Удалить", new { controller = "Category", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
 
             </td>

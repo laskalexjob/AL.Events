@@ -17,6 +17,16 @@ namespace AL.Events.Business.Service
             _repository = repository;
         }
 
+        public Category GetCategory(int id)
+        {
+            if (id < 1)
+            {
+                return null;
+            }
+
+            return _repository.GetById(id);
+        }
+
         public IEnumerable<Category> GetCategoryList()
         {
             return _repository.GetAll();
@@ -27,6 +37,14 @@ namespace AL.Events.Business.Service
             if (model != null)
             {
                 _repository.Create(model);
+            }
+        }
+
+        public void SaveCategory(Category model)
+        {
+            if (model != null)
+            {
+                _repository.Update(model);
             }
         }
 

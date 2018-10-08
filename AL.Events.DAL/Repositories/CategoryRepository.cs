@@ -100,12 +100,62 @@ namespace AL.Events.DAL.Repositories
 
         public Category GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _connection.Open();
+                var command = _dbContext.GetCommand(_connection, DbConstant.Command.GetCategoryByCategoryId);
+                command.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "Id",
+                    Value = id
+                });
+
+                var categoryTable = _dbContext.CreateTable("Categories");
+                categoryTable = _dbContext.FillInTable(categoryTable, command);
+                var @category = ParseToCategory(categoryTable);
+                return @category;
+            }
+            catch (Exception exeption)
+            {
+                _customLogger.WriteToLogInfo(exeption.Message);
+                throw new Exception();
+            }
+            finally
+            {
+                _connection.Close();
+            }
         }
 
         public void Update(Category item)
         {
-            throw new NotImplementedException();
+
+            try
+            {
+                _connection.Open();
+                var command = _dbContext.GetCommand(_connection, DbConstant.Command.SaveCategory);
+                command.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "Id",
+                    Value = item.Id
+                });
+                command.Parameters.Add(new SqlParameter
+                {
+                    ParameterName = "Name",
+                    Value = item.Name
+                });
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception exeption)
+            {
+                _customLogger.WriteToLogInfo(exeption.Message);
+                throw new Exception();
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
         }
 
         #region Parsers
@@ -120,6 +170,19 @@ namespace AL.Events.DAL.Repositories
                 };
             }).ToList();
             return list;
+        }
+
+        private Category ParseToCategory(DataTable dataTable)
+        {
+            var category = dataTable.AsEnumerable().Select(m =>
+            {
+                return new Category()
+                {
+                    Id = m.Field<int>("Id"),
+                    Name = m.Field<string>("Name"),
+                };
+            }).First();
+            return category;
         }
         #endregion
     }

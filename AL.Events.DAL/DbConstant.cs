@@ -12,7 +12,7 @@ namespace AL.Events.DAL
             public const string SaveCategory = "SaveCategory";
             public const string DeleteCategoryByCategoryId = "DeleteCategoryByCategoryId";
             public const string GetCategoriesList = "GetCategoriesList";
-
+            public const string GetCategoryByCategoryId = "GetCategoryByCategoryId";
 
         }
     }
