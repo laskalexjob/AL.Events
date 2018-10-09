@@ -1,15 +1,9 @@
-﻿using AL.Events.Common.Entities;
-using System.Collections.Generic;
-
-namespace AL.Events.Business.Service
+﻿namespace AL.Events.Business.Service
 {
-    public interface ICategoryService
+    public interface IService<T>
     {
-        void Create(Category model);
+        void Create(T model);
         void DeleteCategoryById(int Id);
-        void SaveCategory(Category model);
-        Category GetCategory(int Id);
-        IEnumerable<Category> GetCategoryList();
-        //IEnumerable<string> GetCategoryNameList();
+        void SaveCategory(T model);
     }
 }

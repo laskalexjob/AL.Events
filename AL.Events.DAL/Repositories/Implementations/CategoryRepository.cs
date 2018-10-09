@@ -1,53 +1,43 @@
 ﻿using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
-using AL.Events.DAL.Repositories.Interfaces;
+using AL.Events.DAL.Infrastructure.Factories;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace AL.Events.DAL.Repositories
+namespace AL.Events.DAL.Repositories.Implementations
 {
     public class CategoryRepository : IRepository<Category>
     {
         private readonly ICustomLogger _customLogger;
         private readonly SqlConnection _connection;
         private readonly SqlDbContext _dbContext;
+        private readonly ISqlFactory _sqlFactory;
 
-        public CategoryRepository(ICustomLogger logger)
+        public CategoryRepository(ICustomLogger logger, ISqlFactory sqlFactory)
         {
             _customLogger = logger;
             _dbContext = new SqlDbContext();
             _connection = _dbContext.GetConnection();
+            _sqlFactory = sqlFactory;
         }
 
         public void Create(Category item)
         {
-            try
+            var parameters = new List<IDataParameter>()
             {
-                _connection.Open();
-                var command = _dbContext.GetCommand(_connection, DbConstant.Command.SaveCategory);
-                command.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "Id",
-                    Value = item.Id
-                });
-                command.Parameters.Add(new SqlParameter
-                {
-                    ParameterName = "Name",
-                    Value = item.Name
-                });
+                _sqlFactory.CreateDbParameter("Name", item.Name, DbType.String),
+                _sqlFactory.CreateDbParameter("Id", item.Id, DbType.Int32)
+            };
+
+            var connection = _sqlFactory.CreateSqlConnection();
+
+            using (var command = _sqlFactory.CreateDbCommand("SaveCategory", connection, CommandType.StoredProcedure, parameters))
+            {
+                command.Connection.Open();
                 command.ExecuteNonQuery();
-            }
-            catch (Exception exeption)
-            {
-                _customLogger.WriteToLogInfo(exeption.Message);
-                throw new Exception();
-            }
-            finally
-            {
-                _connection.Close();
             }
         }
 
