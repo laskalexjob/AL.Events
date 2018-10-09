@@ -1,4 +1,5 @@
-﻿using AL.Events.Business.Service;
+﻿using AL.Events.Business.Providers;
+using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
 using AL.Events.WEB.Models;
@@ -10,21 +11,24 @@ namespace AL.Events.WEB.Controllers
 {
     public class CategoryController : Controller
     {
-        private readonly ICategoryService _service;
+        private readonly IService<Category> _service;
         private readonly ICustomLogger _logger;
+        private readonly IProvider<Category> _provider;
 
-        public CategoryController(ICategoryService service, ICustomLogger logger)
+        public CategoryController(IService<Category> service, ICustomLogger logger, IProvider<Category> provider)
         {
             _service = service;
             _logger = logger;
+            _provider = provider;
         }
 
 
         public ActionResult Index()
         {
             _logger.WriteToLogInfo("Hi from Index action of CategoryController");
-            var listCategory = _service.GetCategoryList();
+            var listCategory = _provider.GetAll();
             var viewModel = ConvertToListViewModel(listCategory);
+
             return View(viewModel);
         }
 
@@ -44,7 +48,7 @@ namespace AL.Events.WEB.Controllers
 
         public ActionResult Edit(int Id)
         {
-            var categoryBussiness = _service.GetCategory(Id);
+            var categoryBussiness = _provider.GetById(Id);
             var category = ConvertToViewModel(categoryBussiness);
 
             return View(category);
@@ -68,11 +72,7 @@ namespace AL.Events.WEB.Controllers
 
         public ActionResult Create()
         {
-            var viewModel = new CategoryViewModel()
-            {
-                CategoryList = _service.GetCategoryList()
-            };
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]
@@ -82,14 +82,14 @@ namespace AL.Events.WEB.Controllers
             if (model.Name != null)
             {
                 var category = ConvertToBusinessModelNewCategory(model);
-                _service.SaveCategory(category);
+                _service.Create(category);
                 return RedirectToAction("Index");
             }
             else
             {
                 this.ModelState.AddModelError("", "Internal Exceptions");
             }
-            model.CategoryList = _service.GetCategoryList();
+            model.CategoryList = _provider.GetAll();
             return View(model);
         }
 

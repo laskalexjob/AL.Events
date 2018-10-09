@@ -59,12 +59,20 @@
   <ItemGroup>
     <Compile Include="DbConstant.cs" />
     <Compile Include="Dependencies\DALRegistry.cs" />
+    <Compile Include="Infrastructure\Core\IConnectionManager.cs" />
+    <Compile Include="Infrastructure\Core\Implementations\ConnectionManager.cs" />
+    <Compile Include="Infrastructure\Factories\Implementations\SqlFactory.cs" />
+    <Compile Include="Infrastructure\Factories\ISqlFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\CategoryRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IRepository.cs" />
+    <Compile Include="Repositories\Implementations\CategoryRepository.cs" />
+    <Compile Include="Repositories\Implementations\TestRepository.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="SqlDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AL.Events.DAL.Connections.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,35 +1,16 @@
 ﻿using AL.Events.Common.Entities;
-using AL.Events.DAL.Repositories.Interfaces;
-using System;
+using AL.Events.DAL.Repositories;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AL.Events.Business.Service
+namespace AL.Events.Business.Service.Implementations
 {
-    public class CategoryService : ICategoryService
+    public class CategoryService : IService<Category>
     {
         private readonly IRepository<Category> _repository;
 
         public CategoryService(IRepository<Category> repository)
         {
             _repository = repository;
-        }
-
-        public Category GetCategory(int id)
-        {
-            if (id < 1)
-            {
-                return null;
-            }
-
-            return _repository.GetById(id);
-        }
-
-        public IEnumerable<Category> GetCategoryList()
-        {
-            return _repository.GetAll();
         }
 
         public void Create(Category model)

@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using AL.Events.DAL.Infrastructure.Core.Implementations;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace AL.Events.DAL
@@ -7,7 +8,9 @@ namespace AL.Events.DAL
     {
         public SqlConnection GetConnection()
         {
-            var connection = new SqlConnection(DbConstant.connectionString);
+            var connectionManager = new ConnectionManager();
+            var connectionString = connectionManager.GetConnectionString(DbConstant.conStrName);
+            var connection = new SqlConnection(connectionString);
             return connection;
         }
 
