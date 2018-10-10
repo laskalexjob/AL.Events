@@ -16,6 +16,12 @@ namespace AL.Events.DAL
             public const string DeleteCategoryByCategoryId = "DeleteCategoryByCategoryId";
             public const string GetCategoriesList = "GetCategoriesList";
             public const string GetCategoryByCategoryId = "GetCategoryByCategoryId";
+            public const string CreateCategory = "CreateCategory";
+            public const string UpdateCategory = "UpdateCategory";
+            public const string CreateEvent = "CreateEvent";
+            public const string GetEventsList = "GetEventsList";
+            public const string GetOrganizersList = "GetOrganizersList";
+
 
         }
     }

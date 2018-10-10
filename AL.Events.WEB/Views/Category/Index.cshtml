@@ -32,10 +32,7 @@
             <td>
                 @Html.RouteLink("Изменить", new { controller = "Category", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
                 @Html.RouteLink("Удалить", new { controller = "Category", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
-
             </td>
         </tr>
     }
-
 </table>
-<a href="#" onclick="history.go(-1); return false;" class="btn btn-default">Назад</a>

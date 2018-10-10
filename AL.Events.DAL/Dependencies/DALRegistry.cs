@@ -1,5 +1,4 @@
 ﻿using AL.Events.Common.Entities;
-using AL.Events.Common.Logger;
 using AL.Events.DAL.Infrastructure.Core;
 using AL.Events.DAL.Infrastructure.Core.Implementations;
 using AL.Events.DAL.Infrastructure.Factories;
@@ -14,8 +13,9 @@ namespace AL.Events.DAL.Dependencies
     {
         public DALRegistry()
         {
-            For<ICustomLogger>().Use<CustomLogger>();
             For<IRepository<Category>>().Use<CategoryRepository>();
+            For<IRepository<Event>>().Use<EventRepository>();
+            For<IRepository<Organizer>>().Use<OrganizerRepository>();
             For<IConnectionManager>().Use<ConnectionManager>();
             For<ISqlFactory>().Use<SqlFactory>();
         }

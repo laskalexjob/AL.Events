@@ -4,21 +4,21 @@ using System.Collections.Generic;
 
 namespace AL.Events.Business.Providers.Implementations
 {
-    public class CategoryProvider : IProvider<Category>
+    class EventProvider : IProvider<Event>
     {
-        private readonly IRepository<Category> _repository;
+        private readonly IRepository<Event> _repository;
 
-        public CategoryProvider(IRepository<Category> repository)
+        public EventProvider(IRepository<Event> repository)
         {
             _repository = repository;
         }
 
-        public IReadOnlyCollection<Category> GetAll()
+        public IReadOnlyCollection<Event> GetAll()
         {
             return _repository.GetAll();
         }
 
-        public Category GetById(int id)
+        public Event GetById(int id)
         {
             if (id < 1)
             {

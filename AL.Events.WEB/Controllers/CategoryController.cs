@@ -32,6 +32,62 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Edit(int Id)
+        {
+            var categoryBussiness = _provider.GetById(Id);
+            var category = ConvertToViewModel(categoryBussiness);
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CategoryViewModel viewModel)
+        {
+            var category = ConvertToBusinessModelNewCategory(viewModel);
+
+            try
+            {
+                _service.SaveCategory(category);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError("", "Hello from Controller!");
+            }
+            return View(viewModel);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CategoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var category = ConvertToBusinessModelNewCategory(model);
+                _service.Create(category);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                this.ModelState.AddModelError("", "Hello from Controller!");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            _service.DeleteCategoryById(id);
+
+            return RedirectToAction("Index");
+        }
+
+        #region Converters
         public List<CategoryViewModel> ConvertToListViewModel(IEnumerable<Category> modelList)
         {
             List<CategoryViewModel> resultList = new List<CategoryViewModel>();
@@ -46,77 +102,13 @@ namespace AL.Events.WEB.Controllers
             return resultList;
         }
 
-        public ActionResult Edit(int Id)
-        {
-            var categoryBussiness = _provider.GetById(Id);
-            var category = ConvertToViewModel(categoryBussiness);
-
-            return View(category);
-        }
-
-        [HttpPost]
-        public ActionResult Edit(CategoryViewModel viewModel)
-        {
-            try
-            {
-                var category = ConvertToBusinessModelNewCategory(viewModel);
-                _service.SaveCategory(category);
-                return RedirectToAction("Index");
-            }
-            catch (Exception)
-            {
-                this.ModelState.AddModelError("", "Internal Exceptions");
-            }
-            return View();
-        }
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(CategoryViewModel model)
-        {
-            if (model.Name != null)
-            {
-                var category = ConvertToBusinessModelNewCategory(model);
-                _service.Create(category);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                this.ModelState.AddModelError("", "Internal Exceptions");
-            }
-            model.CategoryList = _provider.GetAll();
-            return View(model);
-        }
-
-        public ActionResult Delete(int id)
-        {
-            _service.DeleteCategoryById(id);
-            return RedirectToAction("Index");
-        }
-
-        #region Converters
         private Category ConvertToBusinessModelNewCategory(CategoryViewModel model)
         {
-            var category = new Category
+            return new Category
             {
                 Id = model.Id,
+                Name = model.Name
             };
-
-            if (model.NewCategoryName is null)
-            {
-                category.Name = model.Name;
-            }
-            else
-            {
-                category.Name = model.NewCategoryName;
-            }
-
-            return category;
         }
 
         private CategoryViewModel ConvertToViewModel(Category categoryBussiness)

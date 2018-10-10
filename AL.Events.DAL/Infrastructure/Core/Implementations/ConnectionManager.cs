@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Configuration;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 
 namespace AL.Events.DAL.Infrastructure.Core.Implementations
@@ -25,9 +24,7 @@ namespace AL.Events.DAL.Infrastructure.Core.Implementations
 
             var fileMap = new ExeConfigurationFileMap()
             {
-
                 ExeConfigFilename = fullPath
-
             };
 
             var configuration = ConfigurationManager.OpenMappedExeConfiguration(fileMap, ConfigurationUserLevel.None);
