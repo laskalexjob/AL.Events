@@ -61,6 +61,10 @@
   <ItemGroup>
     <Compile Include="Dependencies\CommonRegistry.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Event.cs" />
+    <Compile Include="Entities\Organizer.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Logger\CustomLogger.cs" />
     <Compile Include="Logger\ICustomLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

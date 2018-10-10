@@ -12,10 +12,8 @@ namespace AL.Events.WEB.Models
         [Display(Name = "Категория")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Ввведите имя")]
+        //[Required(ErrorMessage = "Ввведите имя")]
         [Display(Name = "Имя новой категории")]
         public string NewCategoryName { get; set; }
-
-        public IEnumerable<Category> CategoryList { get; set; }
     }
 }

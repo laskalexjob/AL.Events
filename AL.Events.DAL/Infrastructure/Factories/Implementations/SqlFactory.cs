@@ -17,22 +17,16 @@ namespace AL.Events.DAL.Infrastructure.Factories.Implementations
             _connectionString = _connectionManager.GetConnectionString(ConnectionName);
         }
 
-        public IDbCommand CreateDbCommand(string commandText,IDbConnection connection, CommandType commandType, IReadOnlyCollection<IDataParameter> parameters = null)
+        public IDbCommand CreateDbCommand(string commandText, IDbConnection connection, CommandType commandType, IReadOnlyCollection<IDataParameter> parameters = null)
         {
-            IDbCommand command;
+            IDbCommand command = new SqlCommand(commandText, connection as SqlConnection) { CommandType = CommandType.StoredProcedure };
 
             if (parameters != null)
             {
-                command = new SqlCommand(commandText, connection as SqlConnection) { CommandType = CommandType.StoredProcedure };
-
                 foreach (var item in parameters)
                 {
                     command.Parameters.Add(item);
                 }
-            }
-            else
-            {
-                command = new SqlCommand(commandText, connection as SqlConnection) { CommandType = CommandType.StoredProcedure };
             }
 
             return command;
@@ -51,9 +45,9 @@ namespace AL.Events.DAL.Infrastructure.Factories.Implementations
 
             var parameter = new SqlParameter()
             {
-                DbType = dbParameterType,
                 ParameterName = parameterName,
-                Value = parameterValue
+                Value = parameterValue,
+                DbType = dbParameterType
             };
 
             return parameter;

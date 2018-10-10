@@ -3,8 +3,6 @@ using AL.Events.Business.Providers.Implementations;
 using AL.Events.Business.Service;
 using AL.Events.Business.Service.Implementations;
 using AL.Events.Common.Entities;
-using AL.Events.DAL.Repositories;
-using AL.Events.DAL.Repositories.Implementations;
 using StructureMap;
 
 namespace AL.Events.Business.Dependencies
@@ -14,8 +12,11 @@ namespace AL.Events.Business.Dependencies
         public BusinessRegistry()
         {
             For<IService<Category>>().Use<CategoryService>();
-            For<IRepository<Category>>().Use<CategoryRepository>();
+            For<IService<Event>>().Use<EventService>();
+            For<IService<Organizer>>().Use<OrganizerService>();
             For<IProvider<Category>>().Use<CategoryProvider>();
+            For<IProvider<Event>>().Use<EventProvider>();
+            For<IProvider<Organizer>>().Use<OrganizerProvider>();
         }
     }
 }
