@@ -105,6 +105,16 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\111.jpg" />
+    <Content Include="Content\img\apple.png" />
+    <Content Include="Content\img\apple2.png" />
+    <Content Include="Content\img\apple3.png" />
+    <Content Include="Content\img\picture_BelSladkoe.jpg" />
+    <Content Include="Content\img\picture_default.jpg" />
+    <Content Include="Content\img\picture_Elena.jpg" />
+    <Content Include="Content\img\picture_Iput.jpg" />
+    <Content Include="Content\img\picture_Mechta.jpg" />
+    <Content Include="Content\img\picture_ProstoMaria.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -153,6 +163,10 @@
     <Content Include="Views\Category\Edit.cshtml" />
     <Content Include="Views\Organizer\Index.cshtml" />
     <Content Include="Views\Event\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Organizer\Create.cshtml" />
+    <Content Include="Views\Organizer\Edit.cshtml" />
+    <Content Include="Views\Event\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -171,6 +185,10 @@
     <ProjectReference Include="..\AL.Events.Common\AL.Events.Common.csproj">
       <Project>{5cb18d61-a81d-4e36-bab5-1e597e10e7df}</Project>
       <Name>AL.Events.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AL.Events.DAL\AL.Events.DAL.csproj">
+      <Project>{2AD6FC4A-4429-47E2-84A3-0E2AD298A71B}</Project>
+      <Name>AL.Events.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\AL.Events.Dependency\AL.Events.Dependency.csproj">
       <Project>{c8350156-bdb5-4163-ae63-08b4f8f36160}</Project>

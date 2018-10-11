@@ -3,6 +3,7 @@ using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
 using AL.Events.WEB.Models;
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
@@ -32,6 +33,67 @@ namespace AL.Events.WEB.Controllers
             return View(viewModelList);
         }
 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(OrganizerViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var organizer = ConvertToBusinessModel(model);
+                _service.Create(organizer);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                this.ModelState.AddModelError("", "Hello from Controller!");
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            var categoryBussiness = _provider.GetById(Id);
+            var category = new OrganizerViewModel()
+            {
+                Id = categoryBussiness.Id,
+                Name = categoryBussiness.Name,
+                Email = categoryBussiness.Email,
+                Phones = categoryBussiness.Phones
+            };
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(OrganizerViewModel viewModel)
+        {
+            var category = ConvertToBusinessModel(viewModel);
+
+            try
+            {
+                _service.Save(category);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError("", "Hello from organizer Controller!");
+            }
+            return View(viewModel);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            _service.DeleteById(id);
+
+            return RedirectToAction("Index");
+        }
+
         #region Converters
         public List<OrganizerViewModel> ConvertToListViewModel(IEnumerable<Organizer> modelList)
         {
@@ -49,7 +111,7 @@ namespace AL.Events.WEB.Controllers
             return resultList;
         }
 
-        private Organizer ConvertToBusinessModelNewOrganizer(OrganizerViewModel model)
+        private Organizer ConvertToBusinessModel(OrganizerViewModel model)
         {
             return new Organizer
             {

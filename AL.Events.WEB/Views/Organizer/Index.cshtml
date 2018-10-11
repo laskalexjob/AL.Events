@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<AL.Events.WEB.Models.OrganizerViewModel>
 
 @{
-    ViewBag.Title = "View";
+                ViewBag.Title = "View";
 }
 
 <h2>Организаторы</h2>
@@ -26,25 +26,26 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelitem => item.Id)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phones)
-        </td>
-        <td>
-            @Html.RouteLink("Изменить", new { controller = "Organizer", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
-            @Html.RouteLink("Удалить", new { controller = "Organizer", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
-        </td>
-    </tr>
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelitem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Email)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Phones)
+    </td>
+    <td>
+        @Html.RouteLink("Изменить", new { controller = "Organizer", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
+        @Html.RouteLink("Удалить", new { controller = "Organizer", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+    </td>
+</tr>
 }
 
 </table>

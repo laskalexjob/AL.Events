@@ -19,12 +19,36 @@ namespace AL.Events.DAL.Repositories.Implementations
 
         public void Create(Organizer item)
         {
-            throw new System.NotImplementedException();
+            var parameters = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Name", item.Name, DbType.String),
+                _sqlFactory.CreateDbParameter("Email", item.Email, DbType.String),
+                _sqlFactory.CreateDbParameter("Phones", item.Phones, DbType.String)
+            };
+
+            var connection = _sqlFactory.CreateSqlConnection();
+
+            using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.CreateOrganizer, connection, CommandType.StoredProcedure, parameters))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
+            var parameters = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Id", id, DbType.Int32)
+            };
+
+            var connection = _sqlFactory.CreateSqlConnection();
+
+            using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.DeleteOrganizerByOrganizerId, connection, CommandType.StoredProcedure, parameters))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public IReadOnlyCollection<Organizer> GetAll()
@@ -59,12 +83,55 @@ namespace AL.Events.DAL.Repositories.Implementations
 
         public Organizer GetById(int id)
         {
-            throw new System.NotImplementedException();
+            Organizer organizer = null;
+
+            var parameter = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Id", id, DbType.Int32)
+            };
+
+            using (var connection = _sqlFactory.CreateSqlConnection())
+            {
+                using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.GetOrganizerByOrganizerId, connection, CommandType.StoredProcedure, parameter))
+                {
+                    command.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            organizer = new Organizer
+                            {
+                                Id = (int)reader["Id"],
+                                Name = (string)reader["Name"],
+                                Email = (string)reader["Email"],
+                                Phones = (string)reader["Phones"]
+                            };
+                        }
+                    }
+                }
+            }
+
+            return organizer;
         }
 
         public void Update(Organizer item)
         {
-            throw new System.NotImplementedException();
+            var parameters = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Id", item.Id, DbType.Int32),
+                _sqlFactory.CreateDbParameter("Name", item.Name, DbType.String),
+                _sqlFactory.CreateDbParameter("Email", item.Email, DbType.String),
+                _sqlFactory.CreateDbParameter("Phones", item.Phones, DbType.String)
+            };
+
+            var connection = _sqlFactory.CreateSqlConnection();
+
+            using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.UpdateOrganizer, connection, CommandType.StoredProcedure, parameters))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
     }
 }

@@ -20,5 +20,10 @@ namespace AL.Events.WEB.Controllers
 
             return View(str as object);
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }
