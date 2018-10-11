@@ -47,7 +47,7 @@ namespace AL.Events.WEB.Controllers
 
             try
             {
-                _service.SaveCategory(category);
+                _service.Save(category);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -82,7 +82,7 @@ namespace AL.Events.WEB.Controllers
 
         public ActionResult Delete(int id)
         {
-            _service.DeleteCategoryById(id);
+            _service.DeleteById(id);
 
             return RedirectToAction("Index");
         }

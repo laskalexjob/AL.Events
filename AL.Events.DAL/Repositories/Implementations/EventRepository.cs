@@ -43,7 +43,18 @@ namespace AL.Events.DAL.Repositories.Implementations
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var parameters = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Id", id, DbType.Int32)
+            };
+
+            var connection = _sqlFactory.CreateSqlConnection();
+
+            using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.DeleteEventByEventId, connection, CommandType.StoredProcedure, parameters))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
         }
 
         public IReadOnlyCollection<Event> GetAll()

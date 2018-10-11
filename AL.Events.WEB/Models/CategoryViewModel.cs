@@ -1,6 +1,4 @@
-﻿using AL.Events.Common.Entities;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AL.Events.WEB.Models
 {
@@ -11,9 +9,5 @@ namespace AL.Events.WEB.Models
         [Required(ErrorMessage = "Укажите имя")]
         [Display(Name = "Категория")]
         public string Name { get; set; }
-
-        //[Required(ErrorMessage = "Ввведите имя")]
-        [Display(Name = "Имя новой категории")]
-        public string NewCategoryName { get; set; }
     }
 }

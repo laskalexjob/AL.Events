@@ -3,7 +3,7 @@
     public interface IService<T>
     {
         void Create(T model);
-        void DeleteCategoryById(int Id);
-        void SaveCategory(T model);
+        void DeleteById(int Id);
+        void Save(T model);
     }
 }

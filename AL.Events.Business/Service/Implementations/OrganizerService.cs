@@ -20,7 +20,7 @@ namespace AL.Events.Business.Service.Implementations
             }
         }
 
-        public void SaveCategory(Organizer model)
+        public void Save(Organizer model)
         {
             if (model != null)
             {
@@ -28,7 +28,7 @@ namespace AL.Events.Business.Service.Implementations
             }
         }
 
-        public void DeleteCategoryById(int Id)
+        public void DeleteById(int Id)
         {
             if (Id > 0)
             {
