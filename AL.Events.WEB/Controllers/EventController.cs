@@ -4,6 +4,7 @@ using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
 using AL.Events.DAL;
 using AL.Events.WEB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,12 +27,12 @@ namespace AL.Events.WEB.Controllers
             _categoryProvider = categoryProvider;
             _organizerProvider = organizerProvider;
         }
-        // GET: Event
+
         public ActionResult Index()
         {
             _logger.WriteToLogInfo("Hi from Index action of EventController");
-            var listCategory = _provider.GetAll();
-            var viewModelList = ConvertToListViewModels(listCategory);
+            var listEvent = _provider.GetAll();
+            var viewModelList = ConvertToListViewModels(listEvent);
 
             return View(viewModelList);
         }
@@ -53,7 +54,7 @@ namespace AL.Events.WEB.Controllers
         {
             if (ModelState.IsValid)
             {
-                var @event = ConvertToBusinessModelForCreate(viewModel);
+                var @event = ConvertToBusinessModel(viewModel);
                 _service.Create(@event);
                 return RedirectToAction("Index");
             }
@@ -63,6 +64,34 @@ namespace AL.Events.WEB.Controllers
             }
             viewModel.CategoryList = _categoryProvider.GetAll();
             viewModel.OrganizerList = _organizerProvider.GetAll();
+            return View(viewModel);
+        }
+
+        public ActionResult Edit(int Id)
+        {
+            var eventBussiness = _provider.GetById(Id);
+            var eventViewModel = ConvertToViewModel(eventBussiness);
+
+            eventViewModel.CategoryList = _categoryProvider.GetAll();
+            eventViewModel.OrganizerList = _organizerProvider.GetAll();
+
+            return View(eventViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EventViewModel viewModel)
+        {
+            var @event = ConvertToBusinessModel(viewModel);
+
+            try
+            {
+                _service.Save(@event);
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                this.ModelState.AddModelError("", "Hello from organizer Controller!");
+            }
             return View(viewModel);
         }
 
@@ -99,10 +128,9 @@ namespace AL.Events.WEB.Controllers
                 CategoryName = model.Category.Name,
                 OrganizerName = model.Organizer.Name,
             };
-
         }
 
-        private Event ConvertToBusinessModelForCreate(EventViewModel viewModel)
+        private Event ConvertToBusinessModel(EventViewModel viewModel)
         {
             var categoryList = _categoryProvider.GetAll();
             var organizerList = _organizerProvider.GetAll();

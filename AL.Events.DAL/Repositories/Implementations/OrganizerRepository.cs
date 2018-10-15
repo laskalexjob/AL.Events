@@ -65,13 +65,8 @@ namespace AL.Events.DAL.Repositories.Implementations
                     {
                         while (reader.Read())
                         {
-                            var organizer = new Organizer()
-                            {
-                                Id = (int)reader["Id"],
-                                Name = (string)reader["Name"],
-                                Phones = (string)reader["Phones"],
-                                Email = (string)reader["Email"]
-                            };
+                            Organizer organizer = MapOrganizerFromDbToBusiness(reader);
+
                             collection.Add(organizer);
                         }
                     }
@@ -100,13 +95,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                     {
                         if (reader.Read())
                         {
-                            organizer = new Organizer
-                            {
-                                Id = (int)reader["Id"],
-                                Name = (string)reader["Name"],
-                                Email = (string)reader["Email"],
-                                Phones = (string)reader["Phones"]
-                            };
+                            organizer = MapOrganizerFromDbToBusiness(reader);
                         }
                     }
                 }
@@ -132,6 +121,17 @@ namespace AL.Events.DAL.Repositories.Implementations
                 command.Connection.Open();
                 command.ExecuteNonQuery();
             }
+        }
+
+        private Organizer MapOrganizerFromDbToBusiness(IDataReader reader)
+        {
+            return new Organizer
+            {
+                Id = (int)reader["Id"],
+                Name = (string)reader["Name"],
+                Email = (string)reader["Email"],
+                Phones = (string)reader["Phones"]
+            };
         }
     }
 }

@@ -27,7 +27,7 @@ namespace AL.Events.WEB.Controllers
         {
             _logger.WriteToLogInfo("Hi from Index action of CategoryController");
             var listCategory = _provider.GetAll();
-            var viewModel = ConvertToListViewModel(listCategory);
+            var viewModel = ConvertToListViewModels(listCategory);
 
             return View(viewModel);
         }
@@ -88,7 +88,7 @@ namespace AL.Events.WEB.Controllers
         }
 
         #region Converters
-        public List<CategoryViewModel> ConvertToListViewModel(IEnumerable<Category> modelList)
+        public List<CategoryViewModel> ConvertToListViewModels(IEnumerable<Category> modelList)
         {
             List<CategoryViewModel> resultList = new List<CategoryViewModel>();
             foreach (Category item in modelList)

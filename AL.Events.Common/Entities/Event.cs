@@ -11,6 +11,7 @@ namespace AL.Events.Common.Entities
         public string Address { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
+        public EventStatus Status { get; set; }
 
         public Category Category { get; set; }
         public Organizer Organizer { get; set; }

@@ -1,18 +1,74 @@
-﻿@model string
+﻿@model IEnumerable<AL.Events.WEB.Models.EventViewModel>
+
+
 @{
     ViewBag.Title = "Index";
 }
-<div class="row">
-    <div class="col-md-9">
-        <h2 class="text-center"> Events </h2>
-        <p> Приложение позволяет размещать информацию о предстоящих событиях, просматривать и редактировать эти данные.</p>
-        <p> Система имеет возможность навигации по категоиям. Реализована страница поиска по конкретным критериям: дата, название, статус.</p>
-        <p> Система обладает аутентификацией и авторизацией. А так же может работать в 4-х режимах:</p>
-        <ul>
-            <li>Гость</li>
-            <li>Пользователь</li>
-            <li>Редактор</li>
-            <li>Администратор</li>
-        </ul>
-    </div>
-</div>
+
+<h2>
+    @Html.RouteLink("Все категории", new { controller = "Home", action = "Index" }, new { @class = "btn btn-default" })
+</h2>
+
+<navigation_Board id="navigationBoard" style="float:left;">
+    <table border="1">
+        @Html.Action("CategorySelection")
+    </table>
+</navigation_Board>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrganizerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <img src="~/Content/img/@item.ImagePath" width="140" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+        </tr>
+    }
+</table>

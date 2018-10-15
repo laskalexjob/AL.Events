@@ -167,6 +167,8 @@
     <Content Include="Views\Organizer\Create.cshtml" />
     <Content Include="Views\Organizer\Edit.cshtml" />
     <Content Include="Views\Event\Create.cshtml" />
+    <Content Include="Views\Event\Edit.cshtml" />
+    <Content Include="Views\Home\CategorySelection.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Navigation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AL.Events.Business\AL.Events.Business.csproj">

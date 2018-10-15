@@ -100,6 +100,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                                 Id = (int)reader["Id"],
                                 Name = (string)reader["Name"]
                             };
+
                             collection.Add(category);
                         }
                     }
