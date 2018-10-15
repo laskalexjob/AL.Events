@@ -71,28 +71,8 @@ namespace AL.Events.DAL.Repositories.Implementations
                     {
                         while (reader.Read())
                         {
-                            var @event = new Event
-                            {
-                                Id = (int)reader["Id"],
-                                Name = (string)reader["Name"],
-                                Date = (DateTime)reader["Date"],
-                                ImagePath = (reader["ImagePath"] == DBNull.Value) ? null : (string)reader["ImagePath"],
-                                Address = (string)reader["Address"],
-                                Description = (string)reader["Description"],
-                                Location = (string)reader["Location"],
-                                Category = new Category()
-                                {
-                                    Id = (int)reader["CategoryId"],
-                                    Name = (string)reader["CategoryName"]
-                                },
-                                Organizer = new Organizer()
-                                {
-                                    Id = (int)reader["OrganizerId"],
-                                    Name = (string)reader["OrganizerName"],
-                                    Phones = (string)reader["OrganizerPhones"],
-                                    Email = (string)reader["OrganizerEmail"]
-                                }
-                            };
+                            var @event = MapEventFromDbToBusiness(reader);
+
                             collection.Add(@event);
                         }
                     }
@@ -104,12 +84,81 @@ namespace AL.Events.DAL.Repositories.Implementations
 
         public Event GetById(int id)
         {
-            throw new NotImplementedException();
+            Event @event = null;
+
+            var parameter = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Id", id, DbType.Int32)
+            };
+
+            using (var connection = _sqlFactory.CreateSqlConnection())
+            {
+                using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.GetEventByEventId, connection, CommandType.StoredProcedure, parameter))
+                {
+                    command.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            @event = MapEventFromDbToBusiness(reader);
+                        }
+                    }
+                }
+            }
+
+            return @event;
         }
 
         public void Update(Event item)
         {
-            throw new NotImplementedException();
+            var parameters = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Id", item.Id, DbType.Int32),
+                _sqlFactory.CreateDbParameter("Name", item.Name, DbType.String),
+                _sqlFactory.CreateDbParameter("Date", item.Date, DbType.DateTime),
+                _sqlFactory.CreateDbParameter("ImagePath", item.ImagePath, DbType.String),
+                _sqlFactory.CreateDbParameter("Address", item.Address, DbType.String),
+                _sqlFactory.CreateDbParameter("Description", item.Description, DbType.String),
+                _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
+                _sqlFactory.CreateDbParameter("CategoryId", item.Category.Id, DbType.Int32),
+                _sqlFactory.CreateDbParameter("OrganizerId", item.Organizer.Id, DbType.Int32),
+            };
+
+            var connection = _sqlFactory.CreateSqlConnection();
+
+            using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.UpdateEvent, connection, CommandType.StoredProcedure, parameters))
+            {
+                command.Connection.Open();
+                command.ExecuteNonQuery();
+            }
+        }
+
+
+        private Event MapEventFromDbToBusiness(IDataReader reader)
+        {
+            return new Event
+            {
+                Id = (int)reader["Id"],
+                Name = (string)reader["Name"],
+                Date = (DateTime)reader["Date"],
+                ImagePath = (reader["ImagePath"] == DBNull.Value) ? null : (string)reader["ImagePath"],
+                Address = (string)reader["Address"],
+                Description = (string)reader["Description"],
+                Location = (string)reader["Location"],
+                Category = new Category()
+                {
+                    Id = (int)reader["CategoryId"],
+                    Name = (string)reader["CategoryName"]
+                },
+                Organizer = new Organizer()
+                {
+                    Id = (int)reader["OrganizerId"],
+                    Name = (string)reader["OrganizerName"],
+                    Phones = (string)reader["OrganizerPhones"],
+                    Email = (string)reader["OrganizerEmail"]
+                }
+            };
         }
     }
 }

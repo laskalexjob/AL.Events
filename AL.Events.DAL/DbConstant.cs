@@ -25,6 +25,8 @@ namespace AL.Events.DAL
             public const string GetOrganizerByOrganizerId = "GetOrganizerByOrganizerId";
             public const string UpdateOrganizer = "UpdateOrganizer";
             public const string DeleteEventByEventId = "DeleteEventByEventId";
+            public const string GetEventByEventId = "GetEventByEventId";
+            public const string UpdateEvent = "UpdateEvent";
         }
 
         public static class Image

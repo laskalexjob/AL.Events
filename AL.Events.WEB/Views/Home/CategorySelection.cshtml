@@ -1,0 +1,24 @@
+﻿@model IEnumerable<AL.Events.WEB.Models.CategoryViewModel>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4>Выберите категорию</h4>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+
+            @if (Model != null)
+            {
+
+                foreach (var item in Model)
+                {
+                    @Html.RouteLink(item.Name, new { controller = "Home", action = "NavigationIndex", id = item.Id }, new { @class = "btn btn-default" })
+
+                    @*<li class="list-group-item"><a href="@item.Name" class="btn btn-primary btn-block">@item.Name</a></li>
+                        <li class="list-group-item"><a href="http://google.com" class="btn btn-success btn-block">Google</a></li>
+                        <li class="list-group-item"><a href="http://technotipstutorial.blogspot.com" class="btn btn-warning btn-block">Official Blog</a></li>*@
+                }
+            }
+        </ul>
+    </div>
+</div>
