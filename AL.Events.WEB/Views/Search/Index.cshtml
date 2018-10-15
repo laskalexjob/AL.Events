@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AL.Events.WEB.Models.EventViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+            <input type="text" id="Search" placeholder="Search" class="form-control" />
+        </div>
+    </div>
+</div>
+<br />
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Категория</th>
+            <th>Дата</th>
+            <th>Адрес</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="Search">
+                <td>@item.Name</td>
+                <td>@item.CategoryName</td>
+                <td>@item.Date</td>
+                <td>@item.Address</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        function Contains(textOne, textTwo) {
+            if (textOne.indexOf(textTwo) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                }
+                else {
+                    $(this).show();
+                }
+            });
+        });
+    });
+</script>
+
