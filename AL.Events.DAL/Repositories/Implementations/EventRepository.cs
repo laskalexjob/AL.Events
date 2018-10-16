@@ -30,6 +30,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
                 _sqlFactory.CreateDbParameter("CategoryId", item.Category.Id, DbType.Int32),
                 _sqlFactory.CreateDbParameter("OrganizerId", item.Organizer.Id, DbType.Int32),
+                _sqlFactory.CreateDbParameter("StatusId", item.Status, DbType.Int32)
             };
 
             var connection = _sqlFactory.CreateSqlConnection();
@@ -123,6 +124,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
                 _sqlFactory.CreateDbParameter("CategoryId", item.Category.Id, DbType.Int32),
                 _sqlFactory.CreateDbParameter("OrganizerId", item.Organizer.Id, DbType.Int32),
+                _sqlFactory.CreateDbParameter("StatusId", item.Status, DbType.Int32)
             };
 
             var connection = _sqlFactory.CreateSqlConnection();
@@ -146,6 +148,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 Address = (string)reader["Address"],
                 Description = (string)reader["Description"],
                 Location = (string)reader["Location"],
+                Status = (EventStatus)reader["StatusId"],
                 Category = new Category()
                 {
                     Id = (int)reader["CategoryId"],

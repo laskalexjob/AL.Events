@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Новое событие</h2>
+<h2>New event</h2>
 
 @using (Html.BeginForm()) 
 {
@@ -25,7 +25,7 @@
         <div class="col-md-10">
             @Html.DropDownListFor(m => m.OrganizerName, new SelectList(Model.OrganizerList.Select(m => m.Name)), "Выберите организатора", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.OrganizerName, "", new { @class = "text-danger" })
-            @Html.RouteLink("Добавить организатора", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
+            @Html.RouteLink("Add organizer", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
         </div>
     </div>
     <div class="form-group">
@@ -72,11 +72,11 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Добавить" class="btn btn-default" />
+            <input type="submit" value="Add" class="btn btn-default" />
         </div>
     </div>
 </div>
 }
 <div>
-    @Html.ActionLink("Назад к списку", "Index")
+    @Html.ActionLink("Back to list", "Index")
 </div>

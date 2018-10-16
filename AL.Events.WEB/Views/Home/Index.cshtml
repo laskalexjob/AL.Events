@@ -6,7 +6,7 @@
 }
 
 <h2>
-    @Html.RouteLink("Все категории", new { controller = "Home", action = "Index" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("All categories", new { controller = "Home", action = "Index" }, new { @class = "btn btn-default" })
 </h2>
 
 <navigation_Board id="navigationBoard" style="float:left;">
@@ -41,6 +41,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Location)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
     </tr>
     @foreach (var item in Model)
     {
@@ -68,6 +71,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
             </td>
         </tr>
     }

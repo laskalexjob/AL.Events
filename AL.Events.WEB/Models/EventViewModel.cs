@@ -9,33 +9,37 @@ namespace AL.Events.WEB.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Укажите название события")]
-        [Display(Name = "Название")]
+        [Required(ErrorMessage = "Name required")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Укажите дату")]
-        [Display(Name = "Дата и время")]
+        [Required(ErrorMessage = "Date required")]
+        [Display(Name = "Date")]
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        [Required(ErrorMessage = "Укажите категорию")]
-        [Display(Name = "Категория")]
+        [Required(ErrorMessage = "Fill in category")]
+        [Display(Name = "Category")]
         public string CategoryName { get; set; }
 
-        [Required(ErrorMessage = "Укажите организатора")]
-        [Display(Name = "Организатор")]
+        [Required(ErrorMessage = "Fill in organizer")]
+        [Display(Name = "Organizer")]
         public string OrganizerName { get; set; }
 
-        [Display(Name = "Фото")]
+        [Display(Name = "Picture")]
         public string ImagePath { get; set; }
 
-        [Display(Name = "Адрес")]
+        [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Display(Name = "Описание")]
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Display(Name = "Место проведения")]
+        [Display(Name = "Venue")]
         public string Location { get; set; }
+
+        [Display(Name = "Current status")]
+        public EventStatus Status { get; set; }
 
         public Category Category { get; set; }
         public Organizer Organizer { get; set; }
@@ -46,5 +50,6 @@ namespace AL.Events.WEB.Models
         public IEnumerable<Category> CategoryList { get; set; }
         public IEnumerable<Organizer> OrganizerList { get; set; }
 
+        public IEnumerable<EventStatus> StatusList { get; set; }
     }
 }
