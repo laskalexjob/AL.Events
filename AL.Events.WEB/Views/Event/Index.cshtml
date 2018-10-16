@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Все события</h2>
+<h2>All events</h2>
 
 <p>
-    @Html.RouteLink("Добавить событие", new { controller = "Event", action = "Create" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Add event", new { controller = "Event", action = "Create" }, new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -38,7 +38,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Location)
         </th>
-        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -71,8 +73,11 @@
             @Html.DisplayFor(modelItem => item.Location)
         </td>
         <td>
-            @Html.RouteLink("Изменить", new { controller = "Event", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
-            @Html.RouteLink("Удалить", new { controller = "Event", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.RouteLink("Edit", new { controller = "Event", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
+            @Html.RouteLink("Delete", new { controller = "Event", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
         </td>
     </tr>
 }

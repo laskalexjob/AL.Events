@@ -56,6 +56,7 @@ namespace AL.Events.WEB.Controllers
                 Location = model.Location,
                 CategoryName = model.Category.Name,
                 OrganizerName = model.Organizer.Name,
+                Status = model.Status
             };
         }
 
@@ -74,6 +75,7 @@ namespace AL.Events.WEB.Controllers
                 Address = viewModel.Address,
                 Description = viewModel.Description,
                 Location = viewModel.Location,
+                Status = viewModel.Status,
                 Category = categoryList.Where(c => c.Name == viewModel.CategoryName).SingleOrDefault(),
                 Organizer = organizerList.Where(o => o.Name == viewModel.OrganizerName).SingleOrDefault()
             };

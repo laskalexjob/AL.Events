@@ -4,10 +4,10 @@
                 ViewBag.Title = "View";
 }
 
-<h2>Организаторы</h2>
+<h2>Organizers</h2>
 
 <p>
-    @Html.RouteLink("Добавить нового организатора", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Add new organizer", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -42,8 +42,8 @@
         @Html.DisplayFor(modelItem => item.Phones)
     </td>
     <td>
-        @Html.RouteLink("Изменить", new { controller = "Organizer", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
-        @Html.RouteLink("Удалить", new { controller = "Organizer", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+        @Html.RouteLink("Edit", new { controller = "Organizer", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
+        @Html.RouteLink("Delete", new { controller = "Organizer", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
     </td>
 </tr>
 }

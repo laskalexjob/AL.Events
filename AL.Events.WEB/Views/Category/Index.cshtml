@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Категории</h2>
+<h2>Categories</h2>
 
 <p>
-    @Html.RouteLink("Добавить новую категорию", new { controller = "Category", action = "Create" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Add new category", new { controller = "Category", action = "Create" }, new { @class = "btn btn-default" })
 </p>
 <table class="table">
     <tr>
@@ -30,8 +30,8 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.RouteLink("Изменить", new { controller = "Category", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
-                @Html.RouteLink("Удалить", new { controller = "Category", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Edit", new { controller = "Category", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Delete", new { controller = "Category", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
             </td>
         </tr>
     }

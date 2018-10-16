@@ -1,9 +1,10 @@
 ﻿namespace AL.Events.Common.Entities
 {
-    public enum EventStatus
+    public enum EventStatus : int
     {
-        Passed,
-        Going,
-        Upcoming
+        Passed = 0,
+        Going = 1,
+        Upcoming = 2,
+        Canceled = 3
     }
 }

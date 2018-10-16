@@ -97,7 +97,8 @@ namespace AL.Events.WEB.Controllers
                 Location = model.Location,
                 CategoryName = model.Category.Name,
                 OrganizerName = model.Organizer.Name,
-                CategoryId = model.Category.Id
+                CategoryId = model.Category.Id,
+                Status = model.Status
             };
         }
 

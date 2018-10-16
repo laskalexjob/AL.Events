@@ -31,6 +31,7 @@ namespace AL.Events.WEB.Controllers
         public ActionResult Index()
         {
             _logger.WriteToLogInfo("Hi from Index action of EventController");
+
             var listEvent = _provider.GetAll();
             var viewModelList = ConvertToListViewModels(listEvent);
 
@@ -55,7 +56,9 @@ namespace AL.Events.WEB.Controllers
             if (ModelState.IsValid)
             {
                 var @event = ConvertToBusinessModel(viewModel);
+                @event.Status = EventStatus.Upcoming;
                 _service.Create(@event);
+
                 return RedirectToAction("Index");
             }
             else
@@ -64,6 +67,7 @@ namespace AL.Events.WEB.Controllers
             }
             viewModel.CategoryList = _categoryProvider.GetAll();
             viewModel.OrganizerList = _organizerProvider.GetAll();
+
             return View(viewModel);
         }
 
@@ -74,6 +78,13 @@ namespace AL.Events.WEB.Controllers
 
             eventViewModel.CategoryList = _categoryProvider.GetAll();
             eventViewModel.OrganizerList = _organizerProvider.GetAll();
+            eventViewModel.StatusList = new List<EventStatus>
+            {
+                EventStatus.Passed,
+                EventStatus.Going,
+                EventStatus.Upcoming,
+                EventStatus.Canceled
+            };
 
             return View(eventViewModel);
         }
@@ -120,13 +131,14 @@ namespace AL.Events.WEB.Controllers
             {
                 Id = model.Id,
                 Name = model.Name,
-                Date = model.Date,
+                Date = model.Date.Date,
                 ImagePath = model.ImagePath,
                 Address = model.Address,
                 Description = model.Description,
                 Location = model.Location,
                 CategoryName = model.Category.Name,
                 OrganizerName = model.Organizer.Name,
+                Status = model.Status
             };
         }
 
@@ -145,6 +157,7 @@ namespace AL.Events.WEB.Controllers
                 Address = viewModel.Address,
                 Description = viewModel.Description,
                 Location = viewModel.Location,
+                Status = viewModel.Status,
                 Category = categoryList.Where(c => c.Name == viewModel.CategoryName).SingleOrDefault(),
                 Organizer = organizerList.Where(o => o.Name == viewModel.OrganizerName).SingleOrDefault()
             };

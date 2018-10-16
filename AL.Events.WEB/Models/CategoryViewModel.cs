@@ -6,8 +6,8 @@ namespace AL.Events.WEB.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Укажите имя")]
-        [Display(Name = "Категория")]
+        [Required(ErrorMessage = "Name required")]
+        [Display(Name = "Category")]
         public string Name { get; set; }
     }
 }
