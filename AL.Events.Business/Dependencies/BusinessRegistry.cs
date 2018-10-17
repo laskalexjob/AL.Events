@@ -14,9 +14,14 @@ namespace AL.Events.Business.Dependencies
             For<IService<Category>>().Use<CategoryService>();
             For<IService<Event>>().Use<EventService>();
             For<IService<Organizer>>().Use<OrganizerService>();
+            For<IService<User>>().Use<UserService>();
+
             For<IProvider<Category>>().Use<CategoryProvider>();
             For<IProvider<Event>>().Use<EventProvider>();
             For<IProvider<Organizer>>().Use<OrganizerProvider>();
+            For<IProvider<User>>().Use<UserProvider>();
+            For<IProvider<Role>>().Use<RoleProvider>();
+
         }
     }
 }

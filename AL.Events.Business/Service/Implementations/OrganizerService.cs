@@ -20,7 +20,7 @@ namespace AL.Events.Business.Service.Implementations
             }
         }
 
-        public void Save(Organizer model)
+        public void Update(Organizer model)
         {
             if (model != null)
             {

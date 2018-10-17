@@ -4,6 +4,6 @@
     {
         void Create(T model);
         void DeleteById(int Id);
-        void Save(T model);
+        void Update(T model);
     }
 }
