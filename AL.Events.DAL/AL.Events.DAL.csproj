@@ -67,7 +67,10 @@
     <Compile Include="Repositories\Implementations\CategoryRepository.cs" />
     <Compile Include="Repositories\Implementations\EventRepository.cs" />
     <Compile Include="Repositories\Implementations\OrganizerRepository.cs" />
+    <Compile Include="Repositories\Implementations\RoleRepository.cs" />
+    <Compile Include="Repositories\Implementations\UserRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="AL.Events.DAL.Connections.config">

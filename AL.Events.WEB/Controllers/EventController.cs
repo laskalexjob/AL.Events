@@ -96,7 +96,7 @@ namespace AL.Events.WEB.Controllers
 
             try
             {
-                _service.Save(@event);
+                _service.Update(@event);
                 return RedirectToAction("Index");
             }
             catch (Exception)
@@ -131,7 +131,7 @@ namespace AL.Events.WEB.Controllers
             {
                 Id = model.Id,
                 Name = model.Name,
-                Date = model.Date.Date,
+                Date = model.Date,
                 ImagePath = model.ImagePath,
                 Address = model.Address,
                 Description = model.Description,
@@ -146,8 +146,8 @@ namespace AL.Events.WEB.Controllers
         {
             var categoryList = _categoryProvider.GetAll();
             var organizerList = _organizerProvider.GetAll();
-            var category = categoryList.Where(c => c.Name == viewModel.CategoryName).FirstOrDefault();
-            var organizer = organizerList.Where(c => c.Name == viewModel.OrganizerName).FirstOrDefault();
+            //var category = categoryList.Where(c => c.Name == viewModel.CategoryName).FirstOrDefault();
+            //var organizer = organizerList.Where(o => o.Name == viewModel.OrganizerName).FirstOrDefault();
             return new Event
             {
                 Id = viewModel.Id,

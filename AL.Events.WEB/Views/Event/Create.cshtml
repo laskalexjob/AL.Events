@@ -23,7 +23,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.OrganizerName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.OrganizerName, new SelectList(Model.OrganizerList.Select(m => m.Name)), "Выберите организатора", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.OrganizerName, new SelectList(Model.OrganizerList.Select(m => m.Name)), "Choose organizer", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.OrganizerName, "", new { @class = "text-danger" })
             @Html.RouteLink("Add organizer", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
         </div>
@@ -38,7 +38,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.CategoryName, new SelectList(Model.CategoryList.Select(m => m.Name)), "Выберите категорию", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(m => m.CategoryName, new SelectList(Model.CategoryList.Select(m => m.Name)), "Choose category", htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
         </div>
     </div>

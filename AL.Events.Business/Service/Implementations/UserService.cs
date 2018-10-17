@@ -3,16 +3,16 @@ using AL.Events.DAL.Repositories;
 
 namespace AL.Events.Business.Service.Implementations
 {
-    public class CategoryService : IService<Category>
+    public class UserService : IService<User>
     {
-        private readonly IRepository<Category> _repository;
+        private readonly IRepository<User> _repository;
 
-        public CategoryService(IRepository<Category> repository)
+        public UserService(IRepository<User> repository)
         {
             _repository = repository;
         }
 
-        public void Create(Category model)
+        public void Create(User model)
         {
             if (model != null)
             {
@@ -20,7 +20,7 @@ namespace AL.Events.Business.Service.Implementations
             }
         }
 
-        public void Update(Category model)
+        public void Update(User model)
         {
             if (model != null)
             {
@@ -35,7 +35,5 @@ namespace AL.Events.Business.Service.Implementations
                 _repository.Delete(Id);
             }
         }
-
-
     }
 }

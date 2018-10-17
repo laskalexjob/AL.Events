@@ -77,7 +77,7 @@ namespace AL.Events.WEB.Controllers
 
             try
             {
-                _service.Save(category);
+                _service.Update(category);
                 return RedirectToAction("Index");
             }
             catch (Exception)

@@ -18,14 +18,6 @@ namespace AL.Events.WEB.Models
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
-        [Required(ErrorMessage = "Fill in category")]
-        [Display(Name = "Category")]
-        public string CategoryName { get; set; }
-
-        [Required(ErrorMessage = "Fill in organizer")]
-        [Display(Name = "Organizer")]
-        public string OrganizerName { get; set; }
-
         [Display(Name = "Picture")]
         public string ImagePath { get; set; }
 
@@ -44,7 +36,14 @@ namespace AL.Events.WEB.Models
         public Category Category { get; set; }
         public Organizer Organizer { get; set; }
 
+        [Required(ErrorMessage = "Fill in category")]
+        [Display(Name = "Category")]
+        public string CategoryName { get; set; }
         public int CategoryId { get; set; }
+
+        [Required(ErrorMessage = "Fill in organizer")]
+        [Display(Name = "Organizer")]
+        public string OrganizerName { get; set; }
         public int OrganizerId { get; set; }
 
         public IEnumerable<Category> CategoryList { get; set; }

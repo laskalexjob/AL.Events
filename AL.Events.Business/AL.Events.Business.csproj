@@ -61,11 +61,14 @@
     <Compile Include="Providers\Implementations\CategoryProvider.cs" />
     <Compile Include="Providers\Implementations\EventProvider.cs" />
     <Compile Include="Providers\Implementations\OrganizerProvider.cs" />
+    <Compile Include="Providers\Implementations\RoleProvider.cs" />
+    <Compile Include="Providers\Implementations\UserProvider.cs" />
     <Compile Include="Providers\IProvider.cs" />
     <Compile Include="Service\ICategoryService.cs" />
     <Compile Include="Service\Implementations\CategoryService.cs" />
     <Compile Include="Service\Implementations\EventService.cs" />
     <Compile Include="Service\Implementations\OrganizerService.cs" />
+    <Compile Include="Service\Implementations\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

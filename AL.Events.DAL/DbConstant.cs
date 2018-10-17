@@ -11,22 +11,31 @@ namespace AL.Events.DAL
 
         public static class Command
         {
-            public const string SaveCategory = "SaveCategory";
-            public const string DeleteCategoryByCategoryId = "DeleteCategoryByCategoryId";
-            public const string GetCategoriesList = "GetCategoriesList";
-            public const string GetCategoryByCategoryId = "GetCategoryByCategoryId";
-            public const string CreateCategory = "CreateCategory";
-            public const string UpdateCategory = "UpdateCategory";
             public const string CreateEvent = "CreateEvent";
+            public const string CreateCategory = "CreateCategory";
+            public const string CreateOrganizer = "CreateOrganizer";
+            public const string CreateUser = "CreateUser";
+
+            public const string GetCategoryByCategoryId = "GetCategoryByCategoryId";
+            public const string GetOrganizerByOrganizerId = "GetOrganizerByOrganizerId";
+            public const string GetEventByEventId = "GetEventByEventId";
+            public const string GetUserById = "GetUserById";
+
+            public const string GetCategoriesList = "GetCategoriesList";
             public const string GetEventsList = "GetEventsList";
             public const string GetOrganizersList = "GetOrganizersList";
-            public const string CreateOrganizer = "CreateOrganizer";
-            public const string DeleteOrganizerByOrganizerId = "DeleteOrganizerByOrganizerId";
-            public const string GetOrganizerByOrganizerId = "GetOrganizerByOrganizerId";
+            public const string GetUsersList = "GetUsersList";
+            public const string GetRolesList = "GetRolesList";
+
+            public const string UpdateUser = "UpdateUser";
+            public const string UpdateCategory = "UpdateCategory";
             public const string UpdateOrganizer = "UpdateOrganizer";
-            public const string DeleteEventByEventId = "DeleteEventByEventId";
-            public const string GetEventByEventId = "GetEventByEventId";
             public const string UpdateEvent = "UpdateEvent";
+
+            public const string DeleteUserById = "DeleteUserById";
+            public const string DeleteOrganizerByOrganizerId = "DeleteOrganizerByOrganizerId";
+            public const string DeleteEventByEventId = "DeleteEventByEventId";
+            public const string DeleteCategoryByCategoryId = "DeleteCategoryByCategoryId";
         }
 
         public static class Image

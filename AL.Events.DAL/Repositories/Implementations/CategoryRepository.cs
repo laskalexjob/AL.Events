@@ -83,7 +83,7 @@ namespace AL.Events.DAL.Repositories.Implementations
 
         public IReadOnlyCollection<Category> GetAll()
         {
-            List<Category> collection = new List<Category>();
+            var collection = new List<Category>();
 
             using (var connection = _sqlFactory.CreateSqlConnection())
             {
