@@ -16,6 +16,8 @@ namespace AL.Events.DAL
             public const string CreateOrganizer = "CreateOrganizer";
             public const string CreateUser = "CreateUser";
 
+            public const string GetUserByLogin = "GetUserByLogin";
+
             public const string GetCategoryByCategoryId = "GetCategoryByCategoryId";
             public const string GetOrganizerByOrganizerId = "GetOrganizerByOrganizerId";
             public const string GetEventByEventId = "GetEventByEventId";

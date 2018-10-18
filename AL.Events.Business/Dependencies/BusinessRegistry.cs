@@ -1,4 +1,5 @@
-﻿using AL.Events.Business.Providers;
+﻿using AL.Events.Business.Authentication;
+using AL.Events.Business.Providers;
 using AL.Events.Business.Providers.Implementations;
 using AL.Events.Business.Service;
 using AL.Events.Business.Service.Implementations;
@@ -15,6 +16,8 @@ namespace AL.Events.Business.Dependencies
             For<IService<Event>>().Use<EventService>();
             For<IService<Organizer>>().Use<OrganizerService>();
             For<IService<User>>().Use<UserService>();
+
+            For<ILoginService>().Use<LoginService>();
 
             For<IProvider<Category>>().Use<CategoryProvider>();
             For<IProvider<Event>>().Use<EventProvider>();

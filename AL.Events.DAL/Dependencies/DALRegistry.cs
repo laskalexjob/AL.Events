@@ -16,6 +16,7 @@ namespace AL.Events.DAL.Dependencies
             For<IRepository<Category>>().Use<CategoryRepository>();
             For<IRepository<Event>>().Use<EventRepository>();
             For<IRepository<Organizer>>().Use<OrganizerRepository>();
+            For<IUserRepository>().Use<UserRepository>();
             For<IRepository<User>>().Use<UserRepository>();
             For<IRepository<Role>>().Use<RoleRepository>();
 
