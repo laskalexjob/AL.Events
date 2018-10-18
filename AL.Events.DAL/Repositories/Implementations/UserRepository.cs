@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
@@ -110,7 +109,30 @@ namespace AL.Events.DAL.Repositories.Implementations
 
         public User GetByLogin(string login)
         {
-            throw new NotImplementedException();
+            User user = null;
+
+            var parameter = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("Login", login, DbType.String)
+            };
+
+            using (var connection = _sqlFactory.CreateSqlConnection())
+            {
+                using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.GetUserByLogin, connection, CommandType.StoredProcedure, parameter))
+                {
+                    command.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            user = MapUserFromDbToBusiness(reader);
+                        }
+                    }
+                }
+            }
+
+            return user;
         }
 
         public void Update(User item)
