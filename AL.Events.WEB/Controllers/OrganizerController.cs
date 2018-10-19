@@ -3,6 +3,7 @@ using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
 using AL.Events.WEB.Models;
+using AL.Events.WEB.RoleAttributes;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
@@ -22,7 +23,7 @@ namespace AL.Events.WEB.Controllers
             _provider = provider;
         }
 
-
+        [ForEditor]
         public ActionResult Index()
         {
             _logger.WriteToLogInfo("Hi from Index action of OrganizerController");
@@ -56,6 +57,7 @@ namespace AL.Events.WEB.Controllers
             return View(model);
         }
 
+        [ForEditor]
         public ActionResult Edit(int Id)
         {
             var categoryBussiness = _provider.GetById(Id);
@@ -71,6 +73,7 @@ namespace AL.Events.WEB.Controllers
         }
 
         [HttpPost]
+        [ForEditor]
         public ActionResult Edit(OrganizerViewModel viewModel)
         {
             var category = ConvertToBusinessModel(viewModel);
@@ -87,6 +90,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
+        [ForEditor]
         public ActionResult Delete(int id)
         {
             _service.DeleteById(id);

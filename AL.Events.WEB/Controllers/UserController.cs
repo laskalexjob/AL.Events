@@ -3,6 +3,7 @@ using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
 using AL.Events.WEB.Models;
+using AL.Events.WEB.RoleAttributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace AL.Events.WEB.Controllers
             _roleProvider = roleProvider;
         }
 
+        [ForAdmin]
         public ActionResult Index()
         {
             _logger.WriteToLogInfo("Hi from Index action of UserController");
@@ -35,6 +37,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModelList);
         }
 
+        [ForAdmin]
         public ActionResult Create()
         {
             var viewModel = new UserViewModel()
@@ -64,6 +67,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
+        [ForAdmin]
         public ActionResult Edit(int Id)
         {
             var businessEntity = _provider.GetById(Id);
@@ -74,6 +78,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
+        [ForAdmin]
         [HttpPost]
         public ActionResult Edit(UserViewModel viewModel)
         {
@@ -91,6 +96,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
+        [ForAdmin]
         public ActionResult Delete(int id)
         {
             _service.DeleteById(id);

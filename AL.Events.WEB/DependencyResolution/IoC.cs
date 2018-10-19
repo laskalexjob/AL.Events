@@ -5,13 +5,20 @@ namespace AL.Events.WEB.DependencyResolution
 {
     public static class IoC
     {
-        public static IContainer Initialize()
+        private static IContainer _container;
+
+        static IoC()
         {
-            return new Container(c =>
+            _container = new Container(c =>
             {
                 c.AddRegistry<DefaultRegistry>();
                 c.AddRegistry<GeneralRegistry>();
             });
+        }
+
+        public static IContainer Initialize()
+        {
+            return _container;
         }
     }
 }

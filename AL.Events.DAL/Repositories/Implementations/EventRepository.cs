@@ -7,7 +7,7 @@ using System.Data;
 
 namespace AL.Events.DAL.Repositories.Implementations
 {
-    public class EventRepository : IRepository<Event>
+    public class EventRepository : IEventRepository
     {
         private readonly ICustomLogger _customLogger;
         private readonly ISqlFactory _sqlFactory;
@@ -30,7 +30,8 @@ namespace AL.Events.DAL.Repositories.Implementations
                 _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
                 _sqlFactory.CreateDbParameter("CategoryId", item.Category.Id, DbType.Int32),
                 _sqlFactory.CreateDbParameter("OrganizerId", item.Organizer.Id, DbType.Int32),
-                _sqlFactory.CreateDbParameter("StatusId", item.Status, DbType.Int32)
+                _sqlFactory.CreateDbParameter("StatusId", item.Status, DbType.Int32),
+                _sqlFactory.CreateDbParameter("UserId", item.UserId, DbType.Int32)
             };
 
             var connection = _sqlFactory.CreateSqlConnection();
@@ -65,6 +66,36 @@ namespace AL.Events.DAL.Repositories.Implementations
             using (var connection = _sqlFactory.CreateSqlConnection())
             {
                 using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.GetEventsList, connection, CommandType.StoredProcedure))
+                {
+                    command.Connection.Open();
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var @event = MapEventFromDbToBusiness(reader);
+
+                            collection.Add(@event);
+                        }
+                    }
+                }
+            }
+
+            return collection;
+        }
+
+        public IReadOnlyCollection<Event> GetByUserId(int id)
+        {
+            List<Event> collection = new List<Event>();
+
+            var parameter = new List<IDataParameter>()
+            {
+                _sqlFactory.CreateDbParameter("UserId", id, DbType.Int32)
+            };
+
+            using (var connection = _sqlFactory.CreateSqlConnection())
+            {
+                using (var command = _sqlFactory.CreateDbCommand(DbConstant.Command.GetEventsByUserId, connection, CommandType.StoredProcedure, parameter))
                 {
                     command.Connection.Open();
 
@@ -124,7 +155,8 @@ namespace AL.Events.DAL.Repositories.Implementations
                 _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
                 _sqlFactory.CreateDbParameter("CategoryId", item.Category.Id, DbType.Int32),
                 _sqlFactory.CreateDbParameter("OrganizerId", item.Organizer.Id, DbType.Int32),
-                _sqlFactory.CreateDbParameter("StatusId", item.Status, DbType.Int32)
+                _sqlFactory.CreateDbParameter("StatusId", item.Status, DbType.Int32),
+                _sqlFactory.CreateDbParameter("UserId", item.UserId, DbType.Int32)
             };
 
             var connection = _sqlFactory.CreateSqlConnection();
@@ -149,11 +181,14 @@ namespace AL.Events.DAL.Repositories.Implementations
                 Description = (string)reader["Description"],
                 Location = (string)reader["Location"],
                 Status = (EventStatus)reader["StatusId"],
+                UserId = (int)reader["UserId"],
+
                 Category = new Category()
                 {
                     Id = (int)reader["CategoryId"],
                     Name = (string)reader["CategoryName"]
                 },
+
                 Organizer = new Organizer()
                 {
                     Id = (int)reader["OrganizerId"],

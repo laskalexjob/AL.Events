@@ -22,6 +22,7 @@ namespace AL.Events.DAL
             public const string GetOrganizerByOrganizerId = "GetOrganizerByOrganizerId";
             public const string GetEventByEventId = "GetEventByEventId";
             public const string GetUserById = "GetUserById";
+            public const string GetEventsByUserId = "GetEventsByUserId";
 
             public const string GetCategoriesList = "GetCategoriesList";
             public const string GetEventsList = "GetEventsList";

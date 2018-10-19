@@ -1,4 +1,5 @@
-﻿using AL.Events.Business.Providers;
+﻿using AL.Events.Business.Authentication;
+using AL.Events.Business.Providers;
 using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
@@ -8,6 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AL.Events.WEB.ExtentionMethods;
+using AL.Events.WEB.RoleAttributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace AL.Events.WEB.Controllers
 {
@@ -15,11 +19,11 @@ namespace AL.Events.WEB.Controllers
     {
         private readonly IService<Event> _service;
         private readonly ICustomLogger _logger;
-        private readonly IProvider<Event> _provider;
+        private readonly IEventProvider _provider;
         private readonly IProvider<Category> _categoryProvider;
         private readonly IProvider<Organizer> _organizerProvider;
 
-        public EventController(IService<Event> service, ICustomLogger logger, IProvider<Event> provider, IProvider<Category> categoryProvider, IProvider<Organizer> organizerProvider)
+        public EventController(IService<Event> service, ICustomLogger logger, IEventProvider provider, IProvider<Category> categoryProvider, IProvider<Organizer> organizerProvider)
         {
             _service = service;
             _logger = logger;
@@ -28,14 +32,28 @@ namespace AL.Events.WEB.Controllers
             _organizerProvider = organizerProvider;
         }
 
+        [ForUser]
         public ActionResult Index()
         {
             _logger.WriteToLogInfo("Hi from Index action of EventController");
 
-            var listEvent = _provider.GetAll();
+            var user = HttpContext.User.GetCurrentUser();
+
+            var listEvent = _provider.GetByUserId(user.Id);
             var viewModelList = ConvertToListViewModels(listEvent);
 
             return View(viewModelList);
+        }
+
+        [ForEditor]
+        public ActionResult EditorIndex()
+        {
+            _logger.WriteToLogInfo("Hi from EditorIndex action of EventController");
+
+            var listEvent = _provider.GetAll();
+            var viewModelList = ConvertToListViewModels(listEvent);
+
+            return View("Index", viewModelList);
         }
 
         public ActionResult Create()
@@ -45,7 +63,6 @@ namespace AL.Events.WEB.Controllers
                 CategoryList = _categoryProvider.GetAll(),
                 OrganizerList = _organizerProvider.GetAll()
             };
-            
 
             return View(viewModel);
         }
@@ -92,17 +109,36 @@ namespace AL.Events.WEB.Controllers
         [HttpPost]
         public ActionResult Edit(EventViewModel viewModel)
         {
+            if (viewModel.Date < DateTime.Now)
+            {
+                this.ModelState.AddModelError("", "Date should be today or in future");
+
+                viewModel.CategoryList = _categoryProvider.GetAll();
+                viewModel.OrganizerList = _organizerProvider.GetAll();
+                viewModel.StatusList = new List<EventStatus>
+                                                            {
+                                                                EventStatus.Passed,
+                                                                EventStatus.Going,
+                                                                EventStatus.Upcoming,
+                                                                EventStatus.Canceled
+                                                            };
+
+                return View(viewModel);
+            }
+
             var @event = ConvertToBusinessModel(viewModel);
 
             try
             {
                 _service.Update(@event);
+
                 return RedirectToAction("Index");
             }
             catch (Exception)
             {
                 this.ModelState.AddModelError("", "Hello from organizer Controller!");
             }
+
             return View(viewModel);
         }
 
@@ -138,7 +174,8 @@ namespace AL.Events.WEB.Controllers
                 Location = model.Location,
                 CategoryName = model.Category.Name,
                 OrganizerName = model.Organizer.Name,
-                Status = model.Status
+                Status = model.Status,
+                UserId = model.UserId
             };
         }
 
@@ -146,8 +183,9 @@ namespace AL.Events.WEB.Controllers
         {
             var categoryList = _categoryProvider.GetAll();
             var organizerList = _organizerProvider.GetAll();
-            //var category = categoryList.Where(c => c.Name == viewModel.CategoryName).FirstOrDefault();
-            //var organizer = organizerList.Where(o => o.Name == viewModel.OrganizerName).FirstOrDefault();
+
+            var user = HttpContext.User.GetCurrentUser();
+
             return new Event
             {
                 Id = viewModel.Id,
@@ -159,7 +197,8 @@ namespace AL.Events.WEB.Controllers
                 Location = viewModel.Location,
                 Status = viewModel.Status,
                 Category = categoryList.Where(c => c.Name == viewModel.CategoryName).SingleOrDefault(),
-                Organizer = organizerList.Where(o => o.Name == viewModel.OrganizerName).SingleOrDefault()
+                Organizer = organizerList.Where(o => o.Name == viewModel.OrganizerName).SingleOrDefault(),
+                UserId = user.Id
             };
         }
         #endregion

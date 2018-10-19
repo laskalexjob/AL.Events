@@ -24,20 +24,27 @@
                     <li>@Html.ActionLink("Search", "Index", "Search", new { area = "" }, new { @class = "navbar-brand" })</li>
                     <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "navbar-brand" })</li>
 
-                    <li>
-                        @Html.ActionLink("Events", "Index", "Event", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
-                    <li>
-                        @Html.ActionLink("Categories", "Index", "Category", new { area = "" }, new { @class = "navbar-brand" })
-                    </li>
-                    <li>
-                    </li>
-                    @if (HttpContext.Current.User.IsInRole("admin"))
+                    @if (HttpContext.Current.User.IsInRole("editor") || HttpContext.Current.User.IsInRole("admin"))
+                    {
+                        <li>@Html.ActionLink("My Events", "EditorIndex", "Event", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+                    else if(HttpContext.Current.User.IsInRole("user"))
+                    {
+                        <li>@Html.ActionLink("My Events", "Index", "Event", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+
+                    @if (HttpContext.Current.User.IsInRole("admin") || HttpContext.Current.User.IsInRole("editor"))
+                    {
+                        <li>@Html.ActionLink("Categories", "Index", "Category", new { area = "" }, new { @class = "navbar-brand" })</li>
+                    }
+
+                    @if (HttpContext.Current.User.IsInRole("admin") || HttpContext.Current.User.IsInRole("editor"))
                     {
                         <li>
                             @Html.ActionLink("Organizers", "Index", "Organizer", new { area = "" }, new { @class = "navbar-brand" })
                         </li>
                     }
+
                     @if (HttpContext.Current.User.IsInRole("admin"))
                     {
                         <li>

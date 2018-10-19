@@ -19,7 +19,7 @@ namespace AL.Events.Business.Service.Implementations
                 _repository.Create(model);
             }
         }
-
+        
         public void Update(Category model)
         {
             if (model != null)
