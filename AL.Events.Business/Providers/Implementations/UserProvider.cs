@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace AL.Events.Business.Providers.Implementations
 {
-    public class UserProvider : IProvider<User>
+    public class UserProvider : IUserProvider
     {
-        private readonly IRepository<User> _repository;
+        private readonly IUserRepository _repository;
 
-        public UserProvider(IRepository<User> repository)
+        public UserProvider(IUserRepository repository)
         {
             _repository = repository;
         }
@@ -26,6 +26,11 @@ namespace AL.Events.Business.Providers.Implementations
             }
 
             return _repository.GetById(id);
+        }
+
+        public User GetByLogin(string login)
+        {
+            return _repository.GetByLogin(login);
         }
     }
 }

@@ -16,18 +16,22 @@ namespace AL.Events.WEB.Models
         [Required(ErrorMessage = "Date required")]
         [Display(Name = "Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 
         [Display(Name = "Picture")]
         public string ImagePath { get; set; }
 
+        [Required(ErrorMessage = "Address plz")]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
+        [Required]
         [Display(Name = "Description")]
         public string Description { get; set; }
 
-        [Display(Name = "Venue")]
+        [Required]
+        [Display(Name = "Location")]
         public string Location { get; set; }
 
         [Display(Name = "Current status")]
@@ -46,8 +50,11 @@ namespace AL.Events.WEB.Models
         public string OrganizerName { get; set; }
         public int OrganizerId { get; set; }
 
+        public int UserId { get; set; }
+
         public IEnumerable<Category> CategoryList { get; set; }
         public IEnumerable<Organizer> OrganizerList { get; set; }
+        public IEnumerable<User> UserList { get; set; }
 
         public IEnumerable<EventStatus> StatusList { get; set; }
     }

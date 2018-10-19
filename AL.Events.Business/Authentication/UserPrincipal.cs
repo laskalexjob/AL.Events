@@ -19,6 +19,14 @@ namespace AL.Events.Business.Authentication
         {
             return User.Role.Name.Contains(role);
         }
+        
+    }
 
+    public static class UserPrincipalUtils
+    {
+        public static User GetCurrentUser(this UserPrincipal user)
+        {
+            return user.User as User;
+        }
     }
 }

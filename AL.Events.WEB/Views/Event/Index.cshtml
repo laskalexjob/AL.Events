@@ -12,6 +12,12 @@
 <table class="table">
     <tr>
         <th>
+            @if(HttpContext.Current.User.IsInRole("admin")|| HttpContext.Current.User.IsInRole("editor"))
+            {
+                @Html.DisplayNameFor(model => model.UserId)
+            }
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
@@ -46,6 +52,12 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @if (HttpContext.Current.User.IsInRole("admin") || HttpContext.Current.User.IsInRole("editor"))
+            {
+                @Html.DisplayFor(model => item.UserId)
+            }
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Id)
         </td>
         <td>
@@ -76,8 +88,14 @@
             @Html.DisplayFor(modelItem => item.Status)
         </td>
         <td>
-            @Html.RouteLink("Edit", new { controller = "Event", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
-            @Html.RouteLink("Delete", new { controller = "Event", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+            @if (item.Status != AL.Events.Common.Entities.EventStatus.Passed | HttpContext.Current.User.IsInRole("admin") | HttpContext.Current.User.IsInRole("editor"))
+            {
+                @Html.RouteLink("Edit", new { controller = "Event", action = "Edit", id = item.Id }, new { @class = "btn btn-default" })
+            }
+            @if (item.Status != AL.Events.Common.Entities.EventStatus.Passed | HttpContext.Current.User.IsInRole("admin") | HttpContext.Current.User.IsInRole("editor"))
+            {
+                @Html.RouteLink("Delete", new { controller = "Event", action = "Delete", id = item.Id }, new { @class = "btn btn-default" })
+            }
         </td>
     </tr>
 }
