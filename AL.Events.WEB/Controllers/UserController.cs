@@ -2,6 +2,7 @@
 using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
+using AL.Events.WEB.ExtentionMethods;
 using AL.Events.WEB.Models;
 using AL.Events.WEB.RoleAttributes;
 using System;
@@ -67,7 +68,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
-        [ForAdmin]
+        [ForUser]
         public ActionResult Edit(int Id)
         {
             var businessEntity = _provider.GetById(Id);
@@ -78,7 +79,7 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
-        [ForAdmin]
+        [ForUser]
         [HttpPost]
         public ActionResult Edit(UserViewModel viewModel)
         {
@@ -87,13 +88,22 @@ namespace AL.Events.WEB.Controllers
             try
             {
                 _service.Update(user);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Event");
             }
             catch (Exception)
             {
                 this.ModelState.AddModelError("", "Hello from User Controller!");
             }
+
             return View(viewModel);
+        }
+
+        [ForUser]
+        public ActionResult EditUser()
+        {
+            var user = HttpContext.User.GetCurrentUser();
+
+            return RedirectToAction("Edit", new { id = user.Id });
         }
 
         [ForAdmin]
@@ -135,7 +145,7 @@ namespace AL.Events.WEB.Controllers
         private User ConvertToBusinessModel(UserViewModel viewModel)
         {
             var roleList = _roleProvider.GetAll();
-            //var role = roleList.Where(c => c.Name == viewModel.RoleName).FirstOrDefault();
+
             return new User
             {
                 Id = viewModel.Id,

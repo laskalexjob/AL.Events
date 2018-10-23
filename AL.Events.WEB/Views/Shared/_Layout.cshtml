@@ -28,7 +28,7 @@
                     {
                         <li>@Html.ActionLink("My Events", "EditorIndex", "Event", new { area = "" }, new { @class = "navbar-brand" })</li>
                     }
-                    else if(HttpContext.Current.User.IsInRole("user"))
+                    else if (HttpContext.Current.User.IsInRole("user"))
                     {
                         <li>@Html.ActionLink("My Events", "Index", "Event", new { area = "" }, new { @class = "navbar-brand" })</li>
                     }
@@ -55,6 +55,7 @@
                 <ul class="nav navbar-nav" style="float: right">
                     @if (HttpContext.Current.User.IsInRole("editor") || HttpContext.Current.User.IsInRole("admin") || HttpContext.Current.User.IsInRole("user"))
                     {
+                        <li>@Html.ActionLink("Profile", "EditUser", "User")</li>
                         <li>  @Html.ActionLink("Logout", "Logout", "Logging")</li>
                     }
                     else
@@ -74,5 +75,7 @@
     </div>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+
 </body>
 </html>

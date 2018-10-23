@@ -1,15 +1,22 @@
 ﻿@model IEnumerable<AL.Events.WEB.Models.EventViewModel>
 
-
 @{
     ViewBag.Title = "Index";
 }
 
-
-
 <h2>
     @Html.RouteLink("All Events", new { controller = "Home", action = "Index" }, new { @class = "btn btn-default" })
 </h2>
+
+    <table class="table table-bordered table-hover">
+        <tbody>
+            <tr>
+                @{
+                    Html.RenderAction("GetRandomAdverts", "Ads");
+                }
+            </tr>
+        </tbody>
+    </table>
 
 <navigation_Board id="navigationBoard" style="float:left;">
     <table border="1">

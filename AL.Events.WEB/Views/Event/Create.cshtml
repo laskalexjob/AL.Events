@@ -27,9 +27,8 @@
                 @Html.ValidationMessageFor(model => model.OrganizerName, "", new { @class = "text-danger" })
                 @if (HttpContext.Current.User.IsInRole("admin") || HttpContext.Current.User.IsInRole("editor"))
                 {
-                        @Html.RouteLink("Add organizer", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
+                    @Html.RouteLink("Add organizer", new { controller = "Organizer", action = "Create" }, new { @class = "btn btn-default" })
                 }
-
             </div>
         </div>
         <div class="form-group">
@@ -46,11 +45,23 @@
                 @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
             </div>
         </div>
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.ImagePath, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input name="Image" type="file" />
+                    @Html.ValidationMessageFor(model => model.ImagePath)
+                </div>
+            </div>*@
+        <div class=" form-group">
+            <img src="~/Content/Images/picture_default.jpg" id="UserImage" class="img-responsive img-thumbnail" />
+            <input type="hidden" name="ImagePath" id=" are" value="/Content/Images/picture_default.jpg" />
+        </div>
         <div class="form-group">
-            @Html.LabelFor(model => model.ImagePath, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input name="Image" type="file" />
-                @Html.ValidationMessageFor(model => model.ImagePath)
+            <div class="control-label col-md-2">
+                <input type="file" id="imageBrowes" />
+            </div>
+            <div class="control-label col-md-2">
+                <input type="button" class="btn btn-default" id="UploadImg" value="Загрузить" />
             </div>
         </div>
         <div class="form-group">
@@ -84,3 +95,7 @@
 <div>
     @Html.ActionLink("Back to list", "Index")
 </div>
+
+@section Scripts {
+    <script src="~/Scripts/Event/UpdateImage.js"></script>
+}

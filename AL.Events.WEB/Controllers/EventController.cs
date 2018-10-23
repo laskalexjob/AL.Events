@@ -11,7 +11,7 @@ using System.Linq;
 using System.Web.Mvc;
 using AL.Events.WEB.ExtentionMethods;
 using AL.Events.WEB.RoleAttributes;
-using System.ComponentModel.DataAnnotations;
+using System.IO;
 
 namespace AL.Events.WEB.Controllers
 {
@@ -61,7 +61,9 @@ namespace AL.Events.WEB.Controllers
             var viewModel = new EventViewModel()
             {
                 CategoryList = _categoryProvider.GetAll(),
-                OrganizerList = _organizerProvider.GetAll()
+                OrganizerList = _organizerProvider.GetAll(),
+                Date = DateTime.Now
+
             };
 
             return View(viewModel);
@@ -70,6 +72,17 @@ namespace AL.Events.WEB.Controllers
         [HttpPost]
         public ActionResult Create(EventViewModel viewModel)
         {
+            if (viewModel.Date < DateTime.Now)
+            {
+                this.ModelState.AddModelError("", "Date should be today or in future");
+
+                viewModel.CategoryList = _categoryProvider.GetAll();
+                viewModel.OrganizerList = _organizerProvider.GetAll();
+                viewModel.Date = DateTime.Now;
+
+                return View(viewModel);
+            }
+
             if (ModelState.IsValid)
             {
                 var @event = ConvertToBusinessModel(viewModel);
@@ -147,6 +160,20 @@ namespace AL.Events.WEB.Controllers
             _service.DeleteById(id);
 
             return RedirectToAction("Index");
+        }
+
+        public JsonResult AddImage()
+        {
+            string path = null;
+            var data = System.Web.HttpContext.Current.Request.Files["imageBrowes"];
+
+            if (data != null)
+            {
+                path = $"/Content/img/{Path.GetFileName(data.FileName)}";
+                data.SaveAs(Server.MapPath(path));
+            }
+
+            return Json(new { imagePath = path });
         }
 
         #region Converters

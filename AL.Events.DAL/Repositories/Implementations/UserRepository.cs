@@ -168,6 +168,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 Name = (string)reader["Name"],
                 LastName = (string)reader["LastName"],
                 Email = (string)reader["Email"],
+
                 Role = new Role()
                 {
                     Id = (int)reader["RoleId"],

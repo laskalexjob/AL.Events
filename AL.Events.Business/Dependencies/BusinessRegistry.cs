@@ -24,6 +24,9 @@ namespace AL.Events.Business.Dependencies
             For<IProvider<Organizer>>().Use<OrganizerProvider>();
             For<IProvider<User>>().Use<UserProvider>();
             For<IProvider<Role>>().Use<RoleProvider>();
+            For<IProvider<AdCommon>>().Use<AdsProvider>();
+
+            For<IAdsProvider>().Use<AdsProvider>();
             For<IUserProvider>().Use<UserProvider>();
             For<IEventProvider>().Use<EventProvider>();
         }

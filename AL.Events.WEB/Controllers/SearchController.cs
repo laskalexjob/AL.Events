@@ -2,7 +2,6 @@
 using AL.Events.Common.Entities;
 using AL.Events.DAL;
 using AL.Events.WEB.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -26,6 +25,14 @@ namespace AL.Events.WEB.Controllers
         {
             var listEvent = _provider.GetAll();
             var viewModelList = ConvertToListViewModels(listEvent);
+            viewModelList.First().CategoryList = _categoryProvider.GetAll();
+            viewModelList.First().StatusList = new List<EventStatus>
+            {
+                EventStatus.Passed,
+                EventStatus.Going,
+                EventStatus.Upcoming,
+                EventStatus.Canceled
+            };
 
             return View(viewModelList);
         }
