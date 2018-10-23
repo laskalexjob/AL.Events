@@ -64,6 +64,7 @@
     <Compile Include="Cache\EventCache.cs" />
     <Compile Include="Cache\IAppCache.cs" />
     <Compile Include="Dependencies\CommonRegistry.cs" />
+    <Compile Include="Entities\AdCommon.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Event.cs" />
     <Compile Include="Entities\EventStatus.cs" />

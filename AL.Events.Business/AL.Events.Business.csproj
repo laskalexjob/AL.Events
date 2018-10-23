@@ -65,7 +65,9 @@
     <Compile Include="Authentication\UserPrincipal.cs" />
     <Compile Include="Dependencies\BusinessRegistry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\IAdsProvider.cs" />
     <Compile Include="Providers\IEventProvider.cs" />
+    <Compile Include="Providers\Implementations\AdsProvider.cs" />
     <Compile Include="Providers\Implementations\CategoryProvider.cs" />
     <Compile Include="Providers\Implementations\EventProvider.cs" />
     <Compile Include="Providers\Implementations\OrganizerProvider.cs" />

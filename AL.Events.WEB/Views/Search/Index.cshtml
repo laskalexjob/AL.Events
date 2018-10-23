@@ -10,6 +10,20 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
             <input type="text" id="Search" placeholder="Search" class="form-control" />
         </div>
+        <p></p>
+        @*<div class="form-group">
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.First().CategoryName, new SelectList(Model.First().CategoryList.Select(m => m.Name)), "Choose category", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.First().CategoryName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <p></p>
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => m.First().Status, new SelectList(Model.First().StatusList.Select(m => m)), "Choose status", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.First().Status, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
     </div>
 </div>
 <br />
@@ -36,6 +50,7 @@
         }
     </tbody>
 </table>
+
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
     $(document).ready(function () {
