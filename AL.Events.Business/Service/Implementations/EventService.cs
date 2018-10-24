@@ -35,6 +35,10 @@ namespace AL.Events.Business.Service.Implementations
                 _cache.Delete("EventCache");
                 _repository.Update(model);
             }
+            else
+            {
+                throw new ArgumentNullException();
+            }
         }
 
         public void DeleteById(int Id)
@@ -46,6 +50,7 @@ namespace AL.Events.Business.Service.Implementations
             }
         }
 
+        #region StatusLogic
         private IReadOnlyCollection<Event> SetStatuses(IReadOnlyCollection<Event> list)
         {
             foreach (var item in list)
@@ -73,5 +78,6 @@ namespace AL.Events.Business.Service.Implementations
 
             return item;
         }
+        #endregion
     }
 }

@@ -62,28 +62,35 @@ namespace AL.Events.Business.Tests.Providers.Implementations
         public void GetByUserId_Valid_Id_ReturnIReadOnlyCollectionOfEvents()
         {
             //Arrange
-            int idArg = 1;
+            int idArg = 2;
 
-            _repositoryMoq.Setup(r => r.GetByUserId(It.IsAny<int>())).Returns((int id) =>
-            {
-                return new List<Event>
+            _repositoryMoq.Setup(r => r.GetByUserId(idArg)).Returns(
+                 new List<Event>
                 {
                     new Event
                     {
-                        Id = id
+                        Id = 1,
+                        UserId = 2,
+                        Address = "Some"
+                    },
+                    new Event
+                    {
+                        Id = 2,
+                        UserId = 2,
+                        Address = "Some"
                     }
-                };
-            });
+                }
+            );
 
             //Act
             var actual = _provider.GetByUserId(idArg);
 
             //Assert
-            Assert.AreNotEqual(null, actual);
+            Assert.IsNotNull(actual);
         }
 
         [TestMethod]
-        public void GetByUserId_Invalid_Id_ReturnIReadOnlyCollectionOfEvents()
+        public void GetByUserId_Invalid_Id_ReturnNull()
         {
             //Arrange
             int idArg = -1;
@@ -103,7 +110,7 @@ namespace AL.Events.Business.Tests.Providers.Implementations
             var actual = _provider.GetByUserId(idArg);
 
             //Assert
-            Assert.AreNotEqual(null, actual);
+            Assert.AreEqual(null, actual);
         }
     }
 }
