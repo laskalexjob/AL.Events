@@ -112,26 +112,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\img\baki.jpg" />
-    <Content Include="Content\img\Bautista.jpg" />
-    <Content Include="Content\img\betch.jpg" />
-    <Content Include="Content\img\cap.jpg" />
-    <Content Include="Content\img\DauniMl.jpg" />
-    <Content Include="Content\img\gvin.jpg" />
-    <Content Include="Content\img\Hiddlston.jpg" />
-    <Content Include="Content\img\iron_men.jpg" />
-    <Content Include="Content\img\jackson.jpg" />
-    <Content Include="Content\img\picture_BelSladkoe.jpg" />
     <Content Include="Content\img\picture_default.jpg" />
-    <Content Include="Content\img\picture_Elena.jpg" />
-    <Content Include="Content\img\picture_Iput.jpg" />
-    <Content Include="Content\img\picture_Mechta.jpg" />
-    <Content Include="Content\img\picture_ProstoMaria.jpg" />
-    <Content Include="Content\img\Pret.jpg" />
-    <Content Include="Content\img\tilda.jpg" />
-    <Content Include="Content\img\tor.jpg" />
-    <Content Include="Content\img\UserImg.jpg" />
-    <Content Include="Content\img\zoe.jpg" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

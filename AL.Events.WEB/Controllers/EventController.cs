@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using AL.Events.WEB.ExtentionMethods;
 using AL.Events.WEB.RoleAttributes;
 using System.IO;
+using System.Web;
 
 namespace AL.Events.WEB.Controllers
 {
@@ -56,6 +57,7 @@ namespace AL.Events.WEB.Controllers
             return View("Index", viewModelList);
         }
 
+        [ForUser]
         public ActionResult Create()
         {
             var viewModel = new EventViewModel()
@@ -69,10 +71,11 @@ namespace AL.Events.WEB.Controllers
             return View(viewModel);
         }
 
+        [ForUser]
         [HttpPost]
-        public ActionResult Create(EventViewModel viewModel)
+        public ActionResult Create(EventViewModel viewModel, HttpPostedFileBase image)
         {
-            if (viewModel.Date < DateTime.Now)
+            if (viewModel.Date < DateTime.Today)
             {
                 this.ModelState.AddModelError("", "Date should be today or in future");
 
@@ -85,8 +88,22 @@ namespace AL.Events.WEB.Controllers
 
             if (ModelState.IsValid)
             {
+                byte[] imageData = null;
+
+                if (image != null)
+                {
+                    using (var binaryReader = new BinaryReader(image.InputStream))
+                    {
+                        imageData = binaryReader.ReadBytes(image.ContentLength);
+                    }
+                }
+
                 var @event = ConvertToBusinessModel(viewModel);
+
                 @event.Status = EventStatus.Upcoming;
+                @event.ImagePath = image.FileName;
+                @event.Image = imageData;
+
                 _service.Create(@event);
 
                 return RedirectToAction("Index");
@@ -120,9 +137,9 @@ namespace AL.Events.WEB.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(EventViewModel viewModel)
+        public ActionResult Edit(EventViewModel viewModel, HttpPostedFileBase image)
         {
-            if (viewModel.Date < DateTime.Now)
+            if (viewModel.Date < DateTime.Today && !HttpContext.User.GetCurrentUser().Role.Name.Equals("admin"))
             {
                 this.ModelState.AddModelError("", "Date should be today or in future");
 
@@ -140,6 +157,19 @@ namespace AL.Events.WEB.Controllers
             }
 
             var @event = ConvertToBusinessModel(viewModel);
+            
+            byte[] imageData = null;
+            if (image != null)
+            {
+                using (var binaryReader = new BinaryReader(image.InputStream))
+                {
+                    imageData = binaryReader.ReadBytes(image.ContentLength);
+                }
+                @event.ImagePath = image.FileName;
+
+            }
+
+            @event.Image = imageData;
 
             try
             {
@@ -162,20 +192,6 @@ namespace AL.Events.WEB.Controllers
             return RedirectToAction("Index");
         }
 
-        public JsonResult AddImage()
-        {
-            string path = null;
-            var data = System.Web.HttpContext.Current.Request.Files["imageBrowes"];
-
-            if (data != null)
-            {
-                path = $"/Content/img/{Path.GetFileName(data.FileName)}";
-                data.SaveAs(Server.MapPath(path));
-            }
-
-            return Json(new { imagePath = path });
-        }
-
         #region Converters
         public List<EventViewModel> ConvertToListViewModels(IEnumerable<Event> modelList)
         {
@@ -195,14 +211,15 @@ namespace AL.Events.WEB.Controllers
                 Id = model.Id,
                 Name = model.Name,
                 Date = model.Date,
-                ImagePath = model.ImagePath,
+                ImagePath = (model.ImagePath.Equals(DbConstant.Image.DefaultImagePath) || model.Image == null) ? model.ImagePath : Convert.ToBase64String(model.Image),
                 Address = model.Address,
                 Description = model.Description,
                 Location = model.Location,
                 CategoryName = model.Category.Name,
                 OrganizerName = model.Organizer.Name,
                 Status = model.Status,
-                UserId = model.UserId
+                UserId = model.UserId,
+
             };
         }
 

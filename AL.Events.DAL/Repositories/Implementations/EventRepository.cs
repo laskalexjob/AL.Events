@@ -25,6 +25,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 _sqlFactory.CreateDbParameter("Name", item.Name, DbType.String),
                 _sqlFactory.CreateDbParameter("Date", item.Date, DbType.DateTime),
                 _sqlFactory.CreateDbParameter("ImagePath", item.ImagePath, DbType.String),
+                _sqlFactory.CreateDbParameter("Image", item.Image, DbType.Binary),
                 _sqlFactory.CreateDbParameter("Address", item.Address, DbType.String),
                 _sqlFactory.CreateDbParameter("Description", item.Description, DbType.String),
                 _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
@@ -150,6 +151,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 _sqlFactory.CreateDbParameter("Name", item.Name, DbType.String),
                 _sqlFactory.CreateDbParameter("Date", item.Date, DbType.DateTime),
                 _sqlFactory.CreateDbParameter("ImagePath", item.ImagePath, DbType.String),
+                _sqlFactory.CreateDbParameter("Image", item.Image, DbType.Binary),
                 _sqlFactory.CreateDbParameter("Address", item.Address, DbType.String),
                 _sqlFactory.CreateDbParameter("Description", item.Description, DbType.String),
                 _sqlFactory.CreateDbParameter("Location", item.Location, DbType.String),
@@ -182,6 +184,7 @@ namespace AL.Events.DAL.Repositories.Implementations
                 Location = (string)reader["Location"],
                 Status = (EventStatus)reader["StatusId"],
                 UserId = (int)reader["UserId"],
+                Image = (reader["Image"] == DBNull.Value) ? null : (byte[])reader["Image"],
 
                 Category = new Category()
                 {

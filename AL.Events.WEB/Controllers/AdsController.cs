@@ -26,7 +26,7 @@ namespace AL.Events.WEB.Controllers
             {
                 parsedList.Add(new AdViewModel()
                 {
-                    Description  = "Свободу Анджеле Девис!",
+                    Description  = "Here might be your ads!",
                     Link = "https://apple.com"
                 });
 

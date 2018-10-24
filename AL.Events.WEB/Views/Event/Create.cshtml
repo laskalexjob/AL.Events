@@ -6,7 +6,7 @@
 
 <h2>New event</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Event", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -45,25 +45,14 @@
                 @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
             </div>
         </div>
-        @*<div class="form-group">
-                @Html.LabelFor(model => model.ImagePath, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    <input name="Image" type="file" />
-                    @Html.ValidationMessageFor(model => model.ImagePath)
-                </div>
-            </div>*@
-        <div class=" form-group">
-            <img src="~/Content/Images/picture_default.jpg" id="UserImage" class="img-responsive img-thumbnail" />
-            <input type="hidden" name="ImagePath" id=" are" value="/Content/Images/picture_default.jpg" />
-        </div>
+
         <div class="form-group">
-            <div class="control-label col-md-2">
-                <input type="file" id="imageBrowes" />
-            </div>
-            <div class="control-label col-md-2">
-                <input type="button" class="btn btn-default" id="UploadImg" value="Загрузить" />
+            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" value="Загрузить файл" name="image" />
             </div>
         </div>
+
         <div class="form-group">
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -95,7 +84,3 @@
 <div>
     @Html.ActionLink("Back to list", "Index")
 </div>
-
-@section Scripts {
-    <script src="~/Scripts/Event/UpdateImage.js"></script>
-}

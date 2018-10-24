@@ -8,16 +8,6 @@
     @Html.RouteLink("All Events", new { controller = "Home", action = "Index" }, new { @class = "btn btn-default" })
 </h2>
 
-    <table class="table table-bordered table-hover">
-        <tbody>
-            <tr>
-                @{
-                    Html.RenderAction("GetRandomAdverts", "Ads");
-                }
-            </tr>
-        </tbody>
-    </table>
-
 <navigation_Board id="navigationBoard" style="float:left;">
     <table border="1">
         @Html.Action("CategorySelection")
@@ -69,9 +59,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
-            <td>
-                <img src="~/Content/img/@item.ImagePath" width="140" />
-            </td>
+            @if (item.ImagePath.Equals(AL.Events.DAL.DbConstant.Image.DefaultImagePath))
+            {
+                <td>
+                    <img src="~/Content/img/@item.ImagePath" width="140" />
+                </td>
+            }
+            else
+            {
+                <td>
+                    <img src="data:image;base64,@item.ImagePath" style="width:50px; height:auto;" />
+                </td>
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>
@@ -86,4 +85,15 @@
             </td>
         </tr>
     }
+
+    <table class="table table-bordered table-hover">
+        <tbody>
+            <tr>
+                @{
+                    Html.RenderAction("GetRandomAdverts", "Ads");
+                }
+            </tr>
+        </tbody>
+    </table>
+
 </table>

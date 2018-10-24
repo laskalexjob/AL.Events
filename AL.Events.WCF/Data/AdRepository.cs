@@ -13,12 +13,10 @@ namespace AL.Events.WCF.Data
         {
             _adList = new List<Ad>
             {
-                 new Ad{ Id = 0, Name = "1XBET.COM", Image = ParseImage("~/Content/Images/XBET.jpg"), Link = "https://1xbet.com/casino/", Description = "Ставки на спорт онлайн"},
-                 new Ad{ Id = 1, Name = "TUT.BY", Image = ParseImage("~/Content/Images/TUTBY.jpg"), Link = "https://www.tut.by/", Description = "Белорусский новостной партал"},
-                 new Ad{ Id = 2, Name = "BELMARKET.BY", Image = ParseImage("~/Content/Images/BelMarket.jpg"), Link = "http://www.bel-market.by/", Description = "Сеть универсальных магазинов"},
-                 new Ad{ Id = 3, Name = "KUFAR.BY", Image = ParseImage("~/Content/Images/kufar.jpg"), Link = "https://www.kufar.by/", Description = "Крупнейшая площадка объявлений"},
-                 new Ad{ Id = 4, Name = "MTS.BY", Image = ParseImage("~/Content/Images/Mts.jpg"), Link = "https://www.mts.by/", Description = "Крупнейший мобильный оператор"},
-                 new Ad{ Id = 5, Name = "BELARUSBANK.BY", Image = ParseImage("~/Content/Images/belarusBank.jpg"), Link = "https://belarusbank.by/", Description = "Крупнейший банк Беларуси"}
+                 new Ad{ Id = 0, Name = "CUCUMBER.COM", Image = ParseImage("~/Content/Images/Cucumber.jpg"), Link = "http://www.buyfreshproduceinc.com/cucumbers-wholesale/", Description = "Fresh cucumbers"},
+                 new Ad{ Id = 2, Name = "BELMARKET.BY", Image = ParseImage("~/Content/Images/BelMarket.jpg"), Link = "http://www.bel-market.by/", Description = "Distribution stores"},
+                 new Ad{ Id = 4, Name = "GUITAR.BY", Image = ParseImage("~/Content/Images/Guitar.jpg"), Link = "https://www.guitarcenter.com/", Description = "Guitar store"},
+                 new Ad{ Id = 5, Name = "BELARUSBANK.BY", Image = ParseImage("~/Content/Images/belarusBank.jpg"), Link = "https://belarusbank.by/", Description = "Biggest bank in belarus"}
             };
         }
 

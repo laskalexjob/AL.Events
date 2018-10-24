@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace AL.Events.Business.Providers.Implementations
 {
-    class EventProvider : IEventProvider
+    public class EventProvider : IEventProvider
     {
         private readonly IEventRepository _repository;
         private readonly IAppCache _cache;
@@ -19,8 +19,6 @@ namespace AL.Events.Business.Providers.Implementations
 
         public IReadOnlyCollection<Event> GetAll()
         {
-            //_cache.Delete("EventCache");
-            //return _repository.GetAll();
             var list = _cache.GetCache("EventCache");
             if (list == null)
             {
@@ -45,6 +43,11 @@ namespace AL.Events.Business.Providers.Implementations
 
         public IReadOnlyCollection<Event> GetByUserId(int id)
         {
+            if(id < 1)
+            {
+                return null;
+            }
+
             var list = _repository.GetByUserId(id);
 
             SetStatuses(list);
@@ -56,21 +59,28 @@ namespace AL.Events.Business.Providers.Implementations
         {
             foreach (var item in list)
             {
-                if (item.Status != EventStatus.Canceled & item.Date > DateTime.Now)
-                {
-                    item.Status = EventStatus.Upcoming;
-                }
-                else if (item.Date == DateTime.Today)
-                {
-                    item.Status = EventStatus.Going;
-                }
-                else
-                {
-                    item.Status = EventStatus.Passed;
-                }
+                SetStatus(item);
             }
 
             return list;
+        }
+
+        private Event SetStatus(Event item)
+        {
+            if (item.Status != EventStatus.Canceled & item.Date > DateTime.Today)
+            {
+                item.Status = EventStatus.Upcoming;
+            }
+            else if (item.Date == DateTime.Today)
+            {
+                item.Status = EventStatus.Going;
+            }
+            else
+            {
+                item.Status = EventStatus.Passed;
+            }
+
+            return item;
         }
     }
 }
