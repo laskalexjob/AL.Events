@@ -2,7 +2,9 @@
 using AL.Events.Business.Service;
 using AL.Events.Common.Entities;
 using AL.Events.Common.Logger;
+using AL.Events.DAL;
 using AL.Events.WEB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -91,7 +93,7 @@ namespace AL.Events.WEB.Controllers
                 Id = model.Id,
                 Name = model.Name,
                 Date = model.Date,
-                ImagePath = model.ImagePath,
+                ImagePath = (model.ImagePath.Equals(DbConstant.Image.DefaultImagePath) || model.Image == null) ? model.ImagePath : Convert.ToBase64String(model.Image),
                 Address = model.Address,
                 Description = model.Description,
                 Location = model.Location,

@@ -9,6 +9,7 @@ namespace AL.Events.Common.Entities
         public string Name { get; set; }
         public DateTime Date { get; set; }
         public string ImagePath { get; set; }
+        public byte[] Image { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }

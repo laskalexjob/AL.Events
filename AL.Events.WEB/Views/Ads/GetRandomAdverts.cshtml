@@ -1,13 +1,19 @@
 ﻿@model IEnumerable<AL.Events.WEB.Models.AdViewModel>
 
-<div>
-    @foreach (var item in Model)
-    {
-        <a href="@item.Link">
-            <img src="data:image;base64,@item.Image" alt="Alternate Text" class="img-thumbnail img-responsive" />
-        </a>
+@{ 
+    Layout = null;
+}
 
-        <p class=" text-info text-center"> @item.Description</p>
-
-    }
+<div class="form-horizontal">
+    <div class="form-group">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-3">
+                <a href="@item.Link">
+                    <img src="data:image;base64,@item.Image" alt="Advert image" class="img-thumbnail img-responsive" />
+                </a>
+                <p class=" text-info text-left"> @item.Description</p>
+            </div>
+        }
+    </div>
 </div>

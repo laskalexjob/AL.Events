@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AL.Events.WEB", "AL.Events.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AL.Events.WCF", "AL.Events.WCF\AL.Events.WCF.csproj", "{A672187D-E4A5-4351-94E0-6E02CC77A917}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AL.Events.Business.Tests", "AL.Events.Business.Tests\AL.Events.Business.Tests.csproj", "{2E2FB78D-28C5-478D-999A-8380033D159A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{A672187D-E4A5-4351-94E0-6E02CC77A917}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A672187D-E4A5-4351-94E0-6E02CC77A917}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A672187D-E4A5-4351-94E0-6E02CC77A917}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E2FB78D-28C5-478D-999A-8380033D159A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E2FB78D-28C5-478D-999A-8380033D159A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E2FB78D-28C5-478D-999A-8380033D159A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E2FB78D-28C5-478D-999A-8380033D159A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

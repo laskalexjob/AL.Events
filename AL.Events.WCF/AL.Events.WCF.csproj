@@ -64,10 +64,9 @@
     <Content Include="AdvertisingService.svc" />
     <Content Include="Content\Images\belarusBank.jpg" />
     <Content Include="Content\Images\BelMarket.jpg" />
-    <Content Include="Content\Images\kufar.jpg" />
-    <Content Include="Content\Images\Mts.jpg" />
-    <Content Include="Content\Images\TUTBY.jpg" />
-    <Content Include="Content\Images\XBET.jpg" />
+    <Content Include="Content\Images\Cucumber.jpg" />
+    <Content Include="Content\Images\Dog.jpg" />
+    <Content Include="Content\Images\Guitar.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -51,11 +51,13 @@ namespace AL.Events.WEB.Models
         public int OrganizerId { get; set; }
 
         public int UserId { get; set; }
+        public int StatusId { get; set; }
 
         public IEnumerable<Category> CategoryList { get; set; }
         public IEnumerable<Organizer> OrganizerList { get; set; }
         public IEnumerable<User> UserList { get; set; }
 
         public IEnumerable<EventStatus> StatusList { get; set; }
+
     }
 }

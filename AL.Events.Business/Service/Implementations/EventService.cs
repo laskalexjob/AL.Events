@@ -1,6 +1,8 @@
 ﻿using AL.Events.Common.Cache;
 using AL.Events.Common.Entities;
 using AL.Events.DAL.Repositories;
+using System;
+using System.Collections.Generic;
 
 namespace AL.Events.Business.Service.Implementations
 {
@@ -28,6 +30,8 @@ namespace AL.Events.Business.Service.Implementations
         {
             if (model != null)
             {
+                SetStatus(model);
+
                 _cache.Delete("EventCache");
                 _repository.Update(model);
             }
@@ -40,6 +44,34 @@ namespace AL.Events.Business.Service.Implementations
                 _cache.Delete("EventCache");
                 _repository.Delete(Id);
             }
+        }
+
+        private IReadOnlyCollection<Event> SetStatuses(IReadOnlyCollection<Event> list)
+        {
+            foreach (var item in list)
+            {
+                SetStatus(item);
+            }
+
+            return list;
+        }
+
+        private Event SetStatus(Event item)
+        {
+            if (item.Status != EventStatus.Canceled & item.Date > DateTime.Today)
+            {
+                item.Status = EventStatus.Upcoming;
+            }
+            else if (item.Date == DateTime.Today)
+            {
+                item.Status = EventStatus.Going;
+            }
+            else
+            {
+                item.Status = EventStatus.Passed;
+            }
+
+            return item;
         }
     }
 }
