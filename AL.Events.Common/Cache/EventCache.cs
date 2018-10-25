@@ -38,9 +38,9 @@ namespace AL.Events.Common.Cache
         {
             var cache = _cache.Get(key);
 
-            var item = cache as IReadOnlyCollection<Event>;
+            var items = cache as IReadOnlyCollection<Event>;
 
-            return item;
+            return items;
         }
 
         public void Update(string key, IReadOnlyCollection<Event> item, int minutes)
