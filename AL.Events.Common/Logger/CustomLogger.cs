@@ -10,10 +10,11 @@ namespace AL.Events.Common.Logger
     {
         private const string _loggerName = "CustomLogger";
         private readonly ILog _log;
+        private readonly string _configFileName = "Log.config";
 
         public CustomLogger()
         {
-            var config = GetConfigFile("Log.config");
+            var config = GetConfigFile(_configFileName);
 
             if(config.Exists)
             {

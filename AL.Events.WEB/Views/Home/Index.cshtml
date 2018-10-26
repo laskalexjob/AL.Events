@@ -17,6 +17,9 @@
 <table class="table">
     <tr>
         <th>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
@@ -27,9 +30,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Address)
@@ -47,18 +47,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrganizerName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
             @if (item.ImagePath.Equals(AL.Events.DAL.DbConstant.Image.DefaultImagePath))
             {
                 <td>
@@ -71,6 +59,18 @@
                     <img src="data:image;base64,@item.ImagePath" style="width:50px; height:auto;" />
                 </td>
             }
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganizerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Address)
             </td>

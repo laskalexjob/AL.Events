@@ -7,14 +7,13 @@ namespace AL.Events.DAL.Infrastructure.Factories.Implementations
 {
     internal class SqlFactory : ISqlFactory
     {
-        private const string _connectionName = DbConstant.conStrName;
         private readonly IConnectionManager _connectionManager;
         private readonly string _connectionString;
 
         public SqlFactory(IConnectionManager connectionManager)
         {
             _connectionManager = connectionManager;
-            _connectionString = _connectionManager.GetConnectionString(_connectionName);
+            _connectionString = _connectionManager.GetConnectionString(DbConstant.conStrName);
         }
 
         public IDbCommand CreateDbCommand(string commandText, IDbConnection connection, CommandType commandType, IReadOnlyCollection<IDataParameter> parameters = null)
