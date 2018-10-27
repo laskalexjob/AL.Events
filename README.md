@@ -5,5 +5,6 @@
 5. Run the app.
 
 ---Optional steps---
+
 4. Now you can create the user with admin role and db_owner(don't forget to switch to 'SQL Server and Windows Authentication mode'.
 5. Add login and password to connection string in config file ~\AL.EVENTS\AL.Events.DAL\AL.Events.DAL.Connections.config
